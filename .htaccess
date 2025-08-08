@@ -5,6 +5,10 @@
 # mod_rewrite starts here
 RewriteEngine on
 
+# NEW: Redirect .html URLs to clean URLs (for SEO and consistency)
+RewriteCond %{THE_REQUEST} \s/+(.*?)\.html[\s?] [NC]
+RewriteRule ^ /%1? [R=301,L]
+
 # does not apply to existing directories, meaning that if the folder exists on the server then don't change anything and don't run the rule
 RewriteCond %{REQUEST_FILENAME} !-d
 
@@ -13,5 +17,3 @@ RewriteCond %{REQUEST_FILENAME}\.html -f
 
 # Rewrite apperance 
 RewriteRule ^(.*)$ $1.html [NC,L]
-
-
