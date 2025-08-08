@@ -281,6 +281,7 @@ p {
     /* Mobile menu container - collapsible */
     .navbar-collapse {
         border: none !important;
+        border-top: none !important;
         margin-top: 1rem !important;
         padding: 0 !important;
         overflow: hidden !important;
@@ -293,6 +294,12 @@ p {
     .navbar-collapse.in {
         max-height: 500px !important;
         overflow: visible !important;
+    }
+
+    #main-navbar {
+        border: none !important;
+        border-top: none !important;
+        box-shadow: none !important;
     }
 
     /* Mobile menu - glass morphism pill style - right aligned */
@@ -338,19 +345,19 @@ p {
         border-radius: 20px !important;
         margin: 0 !important;
         transition: all 0.3s ease !important;
-        border: 1px solid transparent !important;
+        border: none !important; /* ← NO BORDER */
         display: block !important;
         color: rgba(255, 255, 255, 0.9) !important;
         letter-spacing: 1px !important;
         text-transform: uppercase !important;
         min-width: 140px !important;
     }
-
+    
     .navbar-default .navbar-nav > li > a:hover,
     .navbar-default .navbar-nav > li.active > a,
     .navbar-default .navbar-nav > li > a:focus {
         background: rgba(255, 255, 255, 0.1) !important;
-        border-color: rgba(255, 255, 255, 0.2) !important;
+        border: none !important; /* ← NO BORDER */
         color: var(--text-primary) !important;
         text-decoration: none !important;
     }
@@ -368,16 +375,42 @@ p {
 /* Main Hero Section (Index Page) */
 .header {
     height: 100vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)), url("../images/dts_index_bg_image.png");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     position: relative;
     padding-top: 60px;
+    overflow: hidden;
+}
+
+/* Video background styles */
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65));
+    z-index: 2;
+}
+
+/* Ensure hero content stays on top */
+.hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 800px;
+    padding: 0 2rem;
 }
 
 /* Other Page Headers - Consolidated Background Styles */
@@ -418,7 +451,7 @@ p {
     font-family: 'Momcake-Bold', 'Inter', sans-serif;
     font-size: clamp(4.5rem, 9vw, 8rem);
     font-weight: 300;
-    letter-spacing: 1rem;
+    letter-spacing: 1.1rem;
     margin-bottom: 1rem;
     opacity: 0;
     animation: fadeInUp 1.5s ease 0.5s forwards;
@@ -426,7 +459,7 @@ p {
 
 .hero-subtitle {
     font-size: 2rem;
-    font-weight: 300;
+    font-weight: 600;
     letter-spacing: 4px;
     text-transform: uppercase;
     color: var(--text-secondary);
@@ -932,13 +965,6 @@ footer {
         font-size: 1.2rem;
     }
 
-    /* Mobile header adjustments */
-    .header {
-        background-attachment: scroll;
-        padding-top: 120px;
-        min-height: 100vh;
-    }
-
     .hero-content {
         padding: 0 1rem !important;
         max-width: 100% !important;
@@ -1102,6 +1128,22 @@ footer {
         width: 50px;
         height: 50px;
         font-size: 1.2rem;
+    }
+
+    /* FIXED: Hide video and show static background for mobile */
+    .video-background {
+        display: none !important;
+    }
+    
+    .header {
+        /* Updated path - should be relative to CSS file location */
+        background: url("../images/dts_index_bg_image.png") !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-attachment: scroll !important;
+        background-repeat: no-repeat !important;
+        padding-top: 120px;
+        min-height: 100vh;
     }
 }
 
@@ -1308,5 +1350,118 @@ footer {
     
     .about-description {
         font-size: 1.3rem;
+    }
+}
+
+/* AGGRESSIVE NAVBAR FIX - Add this at the very end of your CSS file */
+
+/* Force navbar to always be visible on all screen sizes above 768px */
+@media (min-width: 769px) {
+    /* Override Bootstrap's navbar-collapse hiding */
+    .navbar-collapse {
+        display: block !important;
+        height: auto !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        max-height: none !important;
+    }
+
+    /* Force navbar-nav to be visible */
+    .navbar-nav {
+        display: table !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        float: none !important;
+        margin: 0 auto !important;
+        table-layout: auto !important;
+        background: rgba(40, 40, 50, 0.7) !important;
+        backdrop-filter: blur(20px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-radius: 50px !important;
+        padding: 0.5rem 1.5rem !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    /* Hide toggle button on desktop/tablet */
+    .navbar-toggle {
+        display: none !important;
+    }
+
+    /* Hide brand */
+    .navbar-brand {
+        display: none !important;
+    }
+
+    .navbar-header {
+        display: none !important;
+    }
+
+    /* Force show nav items */
+    .navbar-nav > li {
+        display: table-cell !important;
+        float: none !important;
+        visibility: visible !important;
+    }
+
+    .navbar-nav > li > a {
+        display: block !important;
+        visibility: visible !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-weight: 500 !important;
+        font-size: 1.2rem !important;
+        letter-spacing: 1px !important;
+        text-transform: uppercase !important;
+        padding: 0.75rem 2rem !important;
+        transition: all 0.3s ease !important;
+        border-radius: 30px !important;
+    }
+
+    .navbar-nav > li > a:hover,
+    .navbar-nav > li.active > a {
+        color: var(--text-primary) !important;
+        background: rgba(200, 168, 233, 0.2) !important;
+    }
+
+    /* Container adjustments */
+    .navbar .container {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+}
+
+/* Tablet-specific adjustments */
+@media (min-width: 769px) and (max-width: 991px) {
+    .navbar-nav > li > a {
+        font-size: 1.1rem !important;
+        padding: 0.6rem 1.5rem !important;
+    }
+    
+    .navbar-nav {
+        padding: 0.4rem 1.2rem !important;
+    }
+}
+
+/* Double-check: Force override any Bootstrap collapsing behavior */
+@media (min-width: 769px) {
+    .navbar-collapse.collapse {
+        display: block !important;
+        height: auto !important;
+    }
+    
+    .navbar-collapse.in {
+        display: block !important;
+        height: auto !important;
+    }
+    
+    .navbar-collapse.collapsing {
+        display: block !important;
+        height: auto !important;
     }
 }
