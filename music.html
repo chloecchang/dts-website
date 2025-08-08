@@ -15,39 +15,6 @@
 
     <!-- Custom styles for music-specific elements -->
     <style>
-        /* Force the page to start at the very top */
-        .music-page {
-            margin-top: 0 !important;
-            padding-top: 0 !important;
-        }
-        
-        .music-page .page-header {
-            margin-top: 0 !important;
-            padding-top: 0 !important;
-            margin-bottom: 0 !important;
-            border-bottom: none !important;
-            position: relative !important;
-            top: 0 !important;
-        }
-        
-        /* Make navbar match homepage exactly */
-        .music-page .navbar-default {
-            padding: 2rem 0 !important; /* Match the original homepage padding */
-            margin-top: 0 !important;
-            position: fixed !important;
-            top: 0 !important;
-            z-index: 1000 !important;
-        }
-        
-        /* Remove white line between sections */
-        .music-page .section:first-of-type {
-            margin-top: 0 !important;
-        }
-        
-        .music-page .section.section-dark {
-            border-top: none !important;
-            margin-top: 0 !important;
-        }
 
         .song-card {
             background: rgba(255, 255, 255, 0.03);
@@ -322,7 +289,7 @@
 
 <body class="music-page">
     <!-- Header -->
-    <section class="page-header" id="header" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.65)), url('./assets/images/dts_music_bg_image.png');">
+    <section class="page-header" id="header">
         <!-- Navbar -->
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">

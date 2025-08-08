@@ -79,7 +79,51 @@ p {
     margin-bottom: 1.5rem;
 }
 
-/*=============== 4. Bootstrap Navbar Override ================*/
+/*=============== 4. Page Layout Resets (CONSOLIDATED) ================*/
+/* Apply consistent page layout to all page types */
+.auditions-page,
+.music-page,
+.about-page {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+.auditions-page .page-header,
+.music-page .page-header,
+.about-page .page-header {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    margin-bottom: 0 !important;
+    border-bottom: none !important;
+    position: relative !important;
+    top: 0 !important;
+}
+
+/* Navbar consistency across all pages */
+.auditions-page .navbar-default,
+.music-page .navbar-default,
+.about-page .navbar-default {
+    padding: 2rem 0 !important;
+    margin-top: 0 !important;
+    position: fixed !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+}
+
+/* Remove white lines between sections */
+.auditions-page .section:first-of-type,
+.music-page .section:first-of-type,
+.about-page .section:first-of-type {
+    margin-top: 0 !important;
+}
+
+.music-page .section.section-dark,
+.about-page #about-description {
+    border-top: none !important;
+    margin-top: 0 !important;
+}
+
+/*=============== 5. Bootstrap Navbar Override ================*/
 .navbar-default,
 .navbar.navbar-default {
     background: transparent !important;
@@ -319,7 +363,7 @@ p {
     }
 }
 
-/*=============== 5. Header & Hero Sections ================*/
+/*=============== 6. Header & Hero Sections (CONSOLIDATED) ================*/
 
 /* Main Hero Section (Index Page) */
 .header {
@@ -336,7 +380,7 @@ p {
     padding-top: 60px;
 }
 
-/* Other Page Headers */
+/* Other Page Headers - Consolidated Background Styles */
 .page-header {
     min-height: 60vh;
     display: flex;
@@ -346,21 +390,21 @@ p {
     padding-top: 0 !important;
     padding-bottom: 60px;
     position: relative;
+    background-size: cover;
+    background-position: center;
 }
 
+/* Individual page backgrounds */
 .about-page .page-header {
-    background: url('../images/dts_about_bg_image.png') no-repeat center center;
-    background-size: cover;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.65)), url('../images/dts_about_bg_image.png');
 }
 
 .auditions-page .page-header {
-    background: url('../images/dts_auditions_bg_image.png') no-repeat center center;
-    background-size: cover;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.65)), url('../images/dts_auditions_bg_image.png');
 }
 
 .music-page .page-header {
-    background: url('../images/dts_music_bg_image.png') no-repeat center center;
-    background-size: cover;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.65)), url('../images/dts_music_bg_image.png');
 }
 
 /* Hero Content */
@@ -440,7 +484,7 @@ p {
     animation: fadeInUp 1s ease 0.3s forwards;
 }
 
-/*=============== 6. Section Styles ================*/
+/*=============== 7. Section Styles ================*/
 .section {
     padding: 6rem 0;
     position: relative;
@@ -474,7 +518,7 @@ p {
     margin-top: -1px;
 }
 
-/*=============== 7. About & Card Components ================*/
+/*=============== 8. About & Card Components ================*/
 .about-content {
     max-width: 800px;
     margin: 0 auto;
@@ -663,7 +707,7 @@ p {
     border: 2px solid var(--primary);
 }
 
-/*=============== 8. Music & Video Sections ================*/
+/*=============== 9. Music & Video Sections ================*/
 .music-section {
     background: var(--bg);
     padding: 8rem 0;
@@ -690,7 +734,7 @@ p {
     border-radius: 4px;
 }
 
-/*=============== 9. Contact Section ================*/
+/*=============== 10. Contact Section ================*/
 .contact-section {
     background: var(--bg);
     padding: 6rem 0;
@@ -739,7 +783,7 @@ p {
     text-decoration: none;
 }
 
-/*=============== 10. Footer ================*/
+/*=============== 11. Footer ================*/
 footer {
     background: var(--bg) !important;
     padding: 4rem 0 2rem !important;
@@ -782,7 +826,7 @@ footer {
     font-size: 0.9rem !important;
 }
 
-/*=============== 11. Button Components ================*/
+/*=============== 12. Button Components ================*/
 .btn-primary {
     background: var(--primary);
     border: 2px solid var(--primary);
@@ -825,7 +869,7 @@ footer {
     text-decoration: none;
 }
 
-/*=============== 12. Utility Classes ================*/
+/*=============== 13. Utility Classes ================*/
 .fade-in {
     opacity: 0;
     transform: translateY(30px);
@@ -853,7 +897,7 @@ footer {
     color: var(--text-muted) !important;
 }
 
-/*=============== 13. Animations ================*/
+/*=============== 14. Animations ================*/
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -878,7 +922,7 @@ footer {
     animation: pulse 2s infinite;
 }
 
-/*=============== 14. Mobile Responsive ================*/
+/*=============== 15. Mobile Responsive ================*/
 @media (max-width: 768px) {
     body {
         font-size: 18px;
@@ -1061,7 +1105,7 @@ footer {
     }
 }
 
-/*=============== 15. Bootstrap Compatibility Fixes ================*/
+/*=============== 16. Bootstrap Compatibility Fixes ================*/
 /* Ensure Bootstrap classes work correctly */
 .collapse {
     display: none;
@@ -1095,7 +1139,7 @@ footer {
     z-index: 1030;
 }
 
-/*=============== 16. Legacy Compatibility Classes ================*/
+/*=============== 17. Legacy Compatibility Classes ================*/
 /* Keep some legacy styles for backward compatibility */
 .dark-mode {
     color: var(--text-secondary);
@@ -1126,7 +1170,7 @@ footer {
 .white2 { color: var(--text-primary); }
 .black { color: var(--text-primary); }
 
-/*=============== 17. Additional Mobile Improvements ================*/
+/*=============== 18. Additional Mobile Improvements ================*/
 /* Improve touch targets on mobile */
 @media (max-width: 768px) {
     a, button, .btn, .navbar-toggle {
@@ -1178,13 +1222,6 @@ footer {
 }
 
 /* Enhanced About Description Container */
-.about-content {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 0 2rem;
-}
-
 .about-description-container {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid var(--border);
@@ -1249,7 +1286,7 @@ footer {
     color: var(--primary-hover);
 }
 
-/* Mobile Responsive */
+/* Mobile Responsive for About Description */
 @media (max-width: 768px) {
     .about-description-container {
         padding: 3rem 2rem;

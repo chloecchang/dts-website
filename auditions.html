@@ -14,36 +14,15 @@
     <link rel="stylesheet" href="./assets/css/main.css">
     <!-- Auditions-specific styles -->
     <link rel="stylesheet" href="./assets/css/auditions.css">
-    <style>
-        /* Force the page to start at the very top */
-        .auditions-page {
-            margin-top: 0 !important;
-            padding-top: 0 !important;
-        }
-        
-        .auditions-page .page-header {
-            margin-top: 0 !important;
-            padding-top: 0 !important;
-            margin-bottom: 0 !important;
-            border-bottom: none !important;
-            position: relative !important;
-            top: 0 !important;
-        }
-        
-        /* Make navbar match homepage exactly */
-        .auditions-page .navbar-default {
-            padding: 2rem 0 !important; /* Match the original homepage padding */
-            margin-top: 0 !important;
-            position: fixed !important;
-            top: 0 !important;
-            z-index: 1000 !important;
-        }
-    </style>
+    <!-- 
+    NOTE: All the common header/navbar styles have been moved to main.css!
+    Only page-specific styles should remain in this <style> block.
+    -->
 </head>
 
 <body class="auditions-page">
     <!-- Header -->
-    <section class="page-header" id="header" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.65)), url('./assets/images/dts_auditions_bg_image.png');">
+    <section class="page-header" id="header">
         <!-- Navbar -->
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
@@ -439,7 +418,6 @@
             }
         });
     </script>
-
 
 </body>
 </html>
