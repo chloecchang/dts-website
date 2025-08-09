@@ -1,1467 +1,565 @@
 /*=================================================
-||              Drawn to Scale Website - Main Styles
-||              styling applies to all pages
-||              Love, Chloe (2025) :)
+|| Drawn to Scale Website - Main Styles
+|| styling applies to all pages
+|| Love, Chloe (2025) :)
 ==================================================*/
 
-/*=============== 1. Fonts ================*/
+/*=============== 1) Fonts ================*/
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @font-face {
-    font-family: 'Momcake-Bold';
-    src: url('../fonts/momcake/MOMCAKE-Bold.otf') format('opentype');
-    font-weight: bold;
-    font-display: swap;
+  font-family: 'Momcake-Bold';
+  src: url('../fonts/momcake/MOMCAKE-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-display: swap;
 }
-
 @font-face {
-    font-family: 'Momcake-Thin';
-    src: url('../fonts/momcake/MOMCAKE-Thin.otf') format('opentype');
-    font-weight: 300;
-    font-display: swap;
+  font-family: 'Momcake-Thin';
+  src: url('../fonts/momcake/MOMCAKE-Thin.otf') format('opentype');
+  font-weight: 300;
+  font-display: swap;
 }
 
-/*=============== 2. CSS Variables ================*/
-:root {
-    --primary: #c8a8e9;
-    --primary-hover: #b794e6;
-    --bg: #0a0a0a;
-    --bg-secondary: #0a0a0a;
-    --bg-overlay: rgba(0, 0, 0, 0.7);
-    --text-primary: #ffffff;
-    --text-secondary: #cccccc;
-    --text-muted: #888888;
-    --border: rgba(255, 255, 255, 0.1);
-    --border-hover: rgba(255, 255, 255, 0.2);
-    --glass-bg: rgba(255, 255, 255, 0.08);
-    --glass-border: rgba(255, 255, 255, 0.12);
+/*=============== 2) Design Tokens (CSS Variables) ================*/
+:root{
+  /* Colors */
+  --primary:#c8a8e9;
+  --primary-hover:#b794e6;
+  --bg:#0a0a0a;
+  --bg-secondary:#0a0a0a;
+  --bg-overlay:rgba(0,0,0,.7);
+  --text-primary:#fff;
+  --text-secondary:#ccc;
+  --text-muted:#888;
+  --border:rgba(255,255,255,.1);
+  --border-hover:rgba(255,255,255,.2);
+  --glass-bg:rgba(255,255,255,.08);
+  --glass-border:rgba(255,255,255,.12);
+
+  /* Typography scale (desktop base) */
+  --font-xs: 0.9rem;
+  --font-sm: 1rem;
+  --font-base: 1.2rem;
+  --font-md: 1.4rem;
+  --font-lg: 1.6rem;
+  --font-xl: 1.8rem;
+  --font-2xl: 2rem;
+  --font-3xl: 2.5rem;
+  --font-4xl: 3rem;
+  --font-5xl: 4rem;
+  --font-6xl: 5rem;
+  --font-hero: clamp(4.5rem, 9vw, 8rem);
+  --font-section: clamp(2.5rem, 5vw, 4rem);
+
+  /* Line Heights */
+  --leading-tight: 1.2;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.7;
+  --leading-loose: 1.8;
 }
 
-/*=============== 3. Global Reset & Base Styles ================*/
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/*=============== 3) Reset & Base ================*/
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif!important;
+  background:var(--bg)!important;
+  color:var(--text-primary)!important;
+  line-height:var(--leading-normal);
+  font-size:var(--font-base);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
 }
 
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    background: var(--bg) !important;
-    color: var(--text-primary) !important;
-    line-height: 1.6;
-    font-size: 22px;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
+h1,h2,h3,h4,h5,h6{
+  font-family:'Momcake-Thin','Inter',sans-serif;
+  font-weight:300;
+  color:var(--text-primary);
 }
 
-/* Typography Base */
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Momcake-Thin', 'Inter', sans-serif;
-    font-weight: 300;
-    color: var(--text-primary);
-}
+/* Heading hierarchy */
+h1{font-size:var(--font-6xl);line-height:var(--leading-tight)}
+h2{font-size:var(--font-5xl);line-height:var(--leading-tight)}
+h3{font-size:var(--font-4xl);line-height:var(--leading-tight)}
+h4{font-size:var(--font-3xl);line-height:var(--leading-normal)}
+h5{font-size:var(--font-2xl);line-height:var(--leading-normal)}
+h6{font-size:var(--font-xl);line-height:var(--leading-normal)}
 
-a {
-    color: var(--primary);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
+a{color:var(--primary);text-decoration:none;transition:color .3s}
+a:hover{color:var(--primary-hover)}
 
-a:hover {
-    color: var(--primary-hover);
-    text-decoration: none;
-}
+p{font-size:var(--font-lg);line-height:var(--leading-relaxed);margin-bottom:1.5rem}
 
-p {
-    font-size: 1.6rem;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
+/*=============== 4) Page Layout (unified) ================*/
+.auditions-page,.music-page,.about-page{margin-top:0!important;padding-top:0!important}
+.auditions-page .page-header,.music-page .page-header,.about-page .page-header{
+  margin:0!important;border-bottom:none!important;position:relative!important;top:0!important
 }
-
-/*=============== 4. Page Layout Resets (CONSOLIDATED) ================*/
-/* Apply consistent page layout to all page types */
-.auditions-page,
-.music-page,
-.about-page {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
+.auditions-page .navbar-default,.music-page .navbar-default,.about-page .navbar-default{
+  padding:2rem 0!important;margin-top:0!important;position:fixed!important;top:0!important;z-index:1000!important
 }
-
-.auditions-page .page-header,
-.music-page .page-header,
-.about-page .page-header {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-    margin-bottom: 0 !important;
-    border-bottom: none !important;
-    position: relative !important;
-    top: 0 !important;
-}
-
-/* Navbar consistency across all pages */
-.auditions-page .navbar-default,
-.music-page .navbar-default,
-.about-page .navbar-default {
-    padding: 2rem 0 !important;
-    margin-top: 0 !important;
-    position: fixed !important;
-    top: 0 !important;
-    z-index: 1000 !important;
-}
-
-/* Remove white lines between sections */
 .auditions-page .section:first-of-type,
 .music-page .section:first-of-type,
-.about-page .section:first-of-type {
-    margin-top: 0 !important;
-}
-
+.about-page .section:first-of-type{margin-top:0!important}
 .music-page .section.section-dark,
-.about-page #about-description {
-    border-top: none !important;
-    margin-top: 0 !important;
+.about-page #about-description{border-top:none!important;margin-top:0!important}
+
+/*=============== 5) Navbar (Bootstrap override) ================*/
+.navbar-default,.navbar.navbar-default{
+  background:transparent!important;border:none!important;position:fixed!important;top:0!important;width:100%!important;
+  z-index:1000!important;transition:all .3s!important;padding:2rem 0!important;margin-bottom:0!important;min-height:auto!important
+}
+.navbar-fixed-top{position:fixed!important;top:0!important}
+.navbar{z-index:1030}
+
+/* Desktop ≥769px */
+@media (min-width:769px){
+  .navbar-brand,.navbar-header,.navbar-toggle{display:none!important}
+  .navbar-collapse{
+    display:block!important;height:auto!important;padding:0!important;border:none!important;box-shadow:none!important;
+    overflow:visible!important;visibility:visible!important;opacity:1!important;max-height:none!important
+  }
+  .navbar .container{
+    width:100%!important;display:flex!important;justify-content:center!important;align-items:center!important
+  }
+  .navbar-nav{
+    float:none!important;margin:0 auto!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:1rem!important;
+    background:rgba(0,0,0,.3)!important;backdrop-filter:blur(25px)!important;-webkit-backdrop-filter:blur(25px)!important;
+    border:1px solid var(--border)!important;border-radius:30px!important;padding:1rem 1.5rem!important;
+    box-shadow:0 10px 30px rgba(0,0,0,.5)!important
+  }
+  .navbar-nav>li{display:block!important;float:none!important}
+  .navbar-default .navbar-nav>li>a{
+    color:rgba(255,255,255,.9)!important;font-weight:500!important;font-size:var(--font-base)!important;
+    letter-spacing:2px!important;text-transform:uppercase!important;padding:.75rem 1.25rem!important;border-radius:20px!important;transition:all .3s!important;display:block!important
+  }
+  .navbar-default .navbar-nav>li>a:hover,
+  .navbar-default .navbar-nav>li.active>a{
+    background:rgba(255,255,255,.08)!important;color:var(--text-primary)!important;transform:translateY(-1px)!important
+  }
 }
 
-/*=============== 5. Bootstrap Navbar Override ================*/
-.navbar-default,
-.navbar.navbar-default {
-    background: transparent !important;
-    background-color: transparent !important;
-    border: none !important;
-    position: fixed !important;
-    top: 0 !important;
-    width: 100% !important;
-    z-index: 1000 !important;
-    transition: all 0.3s ease !important;
-    padding: 2rem 0 !important;
-    margin-bottom: 0 !important;
-    min-height: auto !important;
+/* Mobile & Tablet ≤768px */
+@media (max-width:768px){
+  .navbar-default{background:transparent!important;border:none!important;box-shadow:none!important;padding:1rem 0!important}
+  .navbar-brand{display:none!important}
+  .navbar-header{display:block!important;float:none!important;width:100%!important;position:relative!important;text-align:right!important}
+
+  /* Toggle = pill, full-width minus margins */
+  .navbar-toggle{
+    display:block!important;border:1px solid var(--border)!important;border-radius:30px!important;padding:12px 16px!important;
+    background:rgba(0,0,0,.3)!important;backdrop-filter:blur(25px)!important;-webkit-backdrop-filter:blur(25px)!important;
+    box-shadow:0 10px 30px rgba(0,0,0,.5)!important;float:none!important;transition:all .3s!important;
+    width:calc(100vw - 40px)!important;margin:0 20px!important;text-align:center!important;overflow:hidden!important
+  }
+  .navbar-toggle:hover,.navbar-toggle:focus{background:rgba(0,0,0,.4)!important;border-color:var(--border)!important;transform:translateY(-1px)!important}
+  .navbar-toggle .icon-bar{background-color:var(--text-primary)!important;height:3px!important;border-radius:2px!important;width:25px!important;display:block!important;transition:all .3s!important}
+  .navbar-toggle .icon-bar+.icon-bar{margin-top:5px!important}
+  .navbar-toggle[aria-expanded="true"] .icon-bar:nth-child(1){transform:rotate(45deg) translate(5px,5px)!important}
+  .navbar-toggle[aria-expanded="true"] .icon-bar:nth-child(2){opacity:0!important}
+  .navbar-toggle[aria-expanded="true"] .icon-bar:nth-child(3){transform:rotate(-45deg) translate(7px,-6px)!important}
+
+  .navbar-collapse{
+    border:none!important;margin-top:1rem!important;padding:0!important;overflow:hidden!important;max-height:0!important;transition:max-height .4s ease!important;position:relative!important;text-align:center!important
+  }
+  .navbar-collapse.in{max-height:500px!important;overflow:visible!important}
+
+  /* Menu matches toggle width exactly */
+  .navbar-nav{
+    display:inline-flex!important;flex-direction:column!important;gap:1rem!important;background:rgba(0,0,0,.3)!important;
+    backdrop-filter:blur(25px)!important;-webkit-backdrop-filter:blur(25px)!important;border:1px solid var(--border)!important;border-radius:30px!important;
+    padding:2rem!important;box-shadow:0 10px 30px rgba(0,0,0,.5)!important;margin:0!important;
+    width:calc(100vw - 40px)!important;margin-left:20px!important;margin-right:20px!important;
+    opacity:0!important;transform:translateY(-10px)!important;transition:all .3s!important;text-align:center!important
+  }
+  .navbar-collapse.in .navbar-nav{opacity:1!important;transform:translateY(0)!important}
+  .navbar-nav>li{display:block!important;margin:0!important;float:none!important;width:100%!important}
+  .navbar-default .navbar-nav>li>a{
+    padding:1rem!important;font-size:var(--font-sm)!important;font-weight:500!important;text-align:center!important;border-radius:20px!important;margin:0!important;
+    transition:all .3s!important;border:none!important;display:block!important;color:rgba(255,255,255,.9)!important;letter-spacing:2px!important;text-transform:uppercase!important;width:100%!important
+  }
+  .navbar-default .navbar-nav>li>a:hover,
+  .navbar-default .navbar-nav>li.active>a,
+  .navbar-default .navbar-nav>li>a:focus{
+    background:rgba(255,255,255,.08)!important;color:var(--text-primary)!important;text-decoration:none!important;transform:translateY(-1px)!important
+  }
+  .navbar .container{padding:0!important;margin:0!important}
 }
 
-.navbar-fixed-top {
-    position: fixed !important;
-    top: 0 !important;
+/*=============== 6) Collapse helpers (Bootstrap) ================*/
+.collapse{display:none}
+.collapse.in{display:block}
+.collapsing{height:0;overflow:hidden;transition:height .35s ease}
+
+/*=============== 7) Header & Hero ================*/
+.header{
+  height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding-top:60px;overflow:hidden
+}
+.video-background{position:absolute;inset:0;width:100%;height:100%;z-index:1;object-fit:cover}
+.video-overlay{position:absolute;inset:0;width:100%;height:100%;background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.65));z-index:2}
+.hero-content{position:relative;z-index:10;max-width:800px;padding:0 2rem}
+
+.page-header{
+  min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-bottom:60px;position:relative;background-size:cover;background-position:center
+}
+.about-page .page-header{background-image:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.65)),url('../images/dts_about_bg_image.png')}
+.auditions-page .page-header{background-image:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.65)),url('../images/dts_auditions_bg_image.png')}
+.music-page .page-header{background-image:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.65)),url('../images/dts_music_bg_image.png')}
+
+.hero-title{
+  font-family:'Momcake-Bold','Inter',sans-serif;font-size:var(--font-hero);font-weight:300;letter-spacing:1.1rem;line-height:var(--leading-tight);
+  margin-bottom:1rem;opacity:0;animation:fadeInUp 1.5s ease .5s forwards
+}
+.hero-subtitle{
+  font-size:var(--font-2xl);font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--text-secondary);
+  margin-bottom:3rem;opacity:0;animation:fadeInUp 1.5s ease 1s forwards
+}
+.hero-cta{
+  display:inline-block;padding:1rem 3rem;border:2px solid var(--primary);color:var(--primary);font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  font-size:var(--font-lg);transition:all .3s;opacity:0;animation:fadeInUp 1.2s ease 1.2s forwards
+}
+.hero-cta:hover{background:var(--primary);color:var(--bg)}
+
+.center-button{display:flex;justify-content:center;align-items:center;margin-top:2rem;width:100%}
+
+.header-wrapper h1{
+  font-family:'Momcake-Bold','Inter',sans-serif;font-size:clamp(5rem,5vw,7rem);letter-spacing:1rem;color:var(--text-primary);
+  margin-bottom:1rem;opacity:0;animation:fadeInUp 1s ease forwards
+}
+.header-wrapper p{
+  font-size:var(--font-2xl);letter-spacing:3px;text-transform:uppercase;color:var(--primary);
+  opacity:0;animation:fadeInUp 1s ease .3s forwards
 }
 
-/* Desktop Navigation Styles */
-@media (min-width: 769px) {
-    /* Hide the brand on desktop, show navigation centered */
-    .navbar-brand {
-        display: none !important;
-    }
+/*=============== 8) Sections & Cards ================*/
+.section{padding:6rem 0;position:relative}
+.section-dark{background:var(--bg-secondary)}
 
-    .navbar-header {
-        display: none !important;
-    }
+.section-title{
+  font-family:'Momcake-Thin','Inter',sans-serif!important;font-size:var(--font-section)!important;font-weight:300!important;text-align:center!important;
+  margin-bottom:3rem!important;color:var(--text-primary)!important;letter-spacing:4px!important
+}
+.section-subtitle{
+  text-align:center;font-size:var(--font-lg);letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);
+  margin-bottom:4rem;line-height:var(--leading-normal)
+}
+.section:first-of-type{margin-top:-1px}
 
-    /* Center the navigation */
-    .navbar-nav {
-        float: none !important;
-        margin: 0 auto !important;
-        display: table !important;
-        table-layout: auto !important;
-        background: rgba(40, 40, 50, 0.7) !important;
-        backdrop-filter: blur(20px) saturate(180%) !important;
-        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-        border: 1px solid rgba(255, 255, 255, 0.15) !important;
-        border-radius: 50px !important;
-        padding: 0.5rem 1.5rem !important;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
-    }
+.about-content{max-width:800px;margin:0 auto;text-align:center;padding:0 2rem}
 
-    .navbar-nav > li {
-        display: table-cell !important;
-        float: none !important;
-    }
+.about-description{
+  font-size:var(--font-xl);color:var(--text-secondary);line-height:var(--leading-loose);margin-bottom:4rem
+}
+.about-description a{color:var(--primary);transition:color .3s}
+.about-description a:hover{color:var(--primary-hover)}
 
-    .navbar-default .navbar-nav > li > a {
-        color: rgba(255, 255, 255, 0.9) !important;
-        font-weight: 500 !important;
-        font-size: 1.2rem !important;
-        letter-spacing: 1px !important;
-        text-transform: uppercase !important;
-        padding: 0.75rem 2rem !important;
-        transition: all 0.3s ease !important;
-        border-radius: 30px !important;
-    }
-
-    .navbar-default .navbar-nav > li > a:hover,
-    .navbar-default .navbar-nav > li.active > a {
-        color: var(--text-primary) !important;
-        background: rgba(200, 168, 233, 0.2) !important;
-    }
-
-    /* Container adjustments */
-    .navbar .container {
-        width: 100% !important;
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-    }
-
-    .navbar-collapse {
-        padding: 0 !important;
-        border: none !important;
-    }
+.about-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin-top:4rem;max-width:800px;margin-left:auto;margin-right:auto
+}
+.team-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:4rem;padding:0 2rem;justify-content:center
 }
 
-/* Mobile Navigation Styles */
-@media (max-width: 768px) {
-    .navbar-default {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        padding: 1rem 0 !important;
-    }
-
-    /* Hide brand on mobile */
-    .navbar-brand {
-        display: none !important;
-    }
-
-    .navbar-header {
-        display: block !important;
-        float: none !important;
-        text-align: right !important;
-        width: 100% !important;
-        position: relative !important;
-        padding-right: 20px !important;
-    }
-
-    /* Simple hamburger toggle - right side with margin */
-    .navbar-toggle {
-        display: block !important;
-        border: 1px solid rgba(255, 255, 255, 0.15) !important;
-        border-radius: 12px !important;
-        padding: 10px 12px !important;
-        background: rgba(40, 40, 50, 0.7) !important;
-        backdrop-filter: blur(20px) saturate(180%) !important;
-        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-        margin: 0 !important;
-        float: right !important;
-        position: relative !important;
-        transition: all 0.3s ease !important;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
-    }
-
-    .navbar-toggle:hover,
-    .navbar-toggle:focus {
-        background: rgba(40, 40, 50, 0.9) !important;
-        border-color: rgba(255, 255, 255, 0.25) !important;
-        transform: scale(1.02) !important;
-    }
-
-    .navbar-toggle .icon-bar {
-        background-color: var(--text-primary) !important;
-        height: 3px !important;
-        border-radius: 2px !important;
-        width: 25px !important;
-        display: block !important;
-        transition: all 0.3s ease !important;
-    }
-
-    .navbar-toggle .icon-bar + .icon-bar {
-        margin-top: 5px !important;
-    }
-
-    /* Simple hamburger to X animation */
-    .navbar-toggle[aria-expanded="true"] .icon-bar:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px) !important;
-    }
-
-    .navbar-toggle[aria-expanded="true"] .icon-bar:nth-child(2) {
-        opacity: 0 !important;
-    }
-
-    .navbar-toggle[aria-expanded="true"] .icon-bar:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -6px) !important;
-    }
-
-    /* Mobile menu container - collapsible */
-    .navbar-collapse {
-        border: none !important;
-        border-top: none !important;
-        margin-top: 1rem !important;
-        padding: 0 !important;
-        overflow: hidden !important;
-        max-height: 0 !important;
-        transition: max-height 0.4s ease !important;
-        position: relative !important;
-        text-align: right !important;
-    }
-
-    .navbar-collapse.in {
-        max-height: 500px !important;
-        overflow: visible !important;
-    }
-
-    #main-navbar {
-        border: none !important;
-        border-top: none !important;
-        box-shadow: none !important;
-    }
-
-    /* Mobile menu - glass morphism pill style - right aligned */
-    .navbar-nav {
-        display: inline-flex !important;
-        flex-direction: column !important;
-        gap: 0.75rem !important;
-        background: rgba(40, 40, 50, 0.8) !important;
-        backdrop-filter: blur(20px) saturate(180%) !important;
-        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-        border: 1px solid rgba(255, 255, 255, 0.15) !important;
-        border-radius: 25px !important;
-        padding: 1.5rem !important;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
-        float: none !important;
-        margin: 0 20px 0 0 !important;
-        width: fit-content !important;
-        max-width: 280px !important;
-        opacity: 0 !important;
-        transform: translateY(-10px) !important;
-        transition: all 0.3s ease !important;
-        position: relative !important;
-        text-align: center !important;
-    }
-
-    .navbar-collapse.in .navbar-nav {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-    }
-
-    .navbar-nav > li {
-        display: block !important;
-        margin: 0 !important;
-        float: none !important;
-        width: 100% !important;
-    }
-
-    .navbar-default .navbar-nav > li > a {
-        padding: 0.75rem 1.5rem !important;
-        font-size: 1.1rem !important;
-        font-weight: 500 !important;
-        text-align: center !important;
-        border-radius: 20px !important;
-        margin: 0 !important;
-        transition: all 0.3s ease !important;
-        border: none !important; /* ← NO BORDER */
-        display: block !important;
-        color: rgba(255, 255, 255, 0.9) !important;
-        letter-spacing: 1px !important;
-        text-transform: uppercase !important;
-        min-width: 140px !important;
-    }
-    
-    .navbar-default .navbar-nav > li > a:hover,
-    .navbar-default .navbar-nav > li.active > a,
-    .navbar-default .navbar-nav > li > a:focus {
-        background: rgba(255, 255, 255, 0.1) !important;
-        border: none !important; /* ← NO BORDER */
-        color: var(--text-primary) !important;
-        text-decoration: none !important;
-    }
-
-    /* Container adjustments for mobile */
-    .navbar .container {
-        width: 100% !important;
-        padding: 0 15px !important;
-        margin: 0 !important;
-    }
+/* Standard about cards */
+.about-card{
+  background:rgba(255,255,255,.035);border:1px solid var(--border);padding:3rem 2rem;text-align:center;transition:all .3s;
+  backdrop-filter:blur(10px);border-radius:4px
 }
+.about-card:hover{background:rgba(255,255,255,.005);border-color:var(--border-hover);transform:translateY(-3px)}
+.about-card h3{
+  font-family:'Momcake-Thin','Inter',sans-serif;font-size:var(--font-3xl);font-weight:400;margin-bottom:1.5rem;color:var(--primary);letter-spacing:2px
+}
+.about-card p{color:var(--text-secondary);line-height:var(--leading-loose);font-size:var(--font-md)}
+.about-card img{width:100%;max-width:300px;border-radius:4px;margin-top:2rem;opacity:.9;transition:opacity .3s}
+.about-card:hover img{opacity:1}
 
-/*=============== 6. Header & Hero Sections (CONSOLIDATED) ================*/
+/* Team cards */
+.team-card{
+  background:rgba(255,255,255,.02);border:1px solid var(--border);padding:2rem;text-align:center;transition:all .3s;backdrop-filter:blur(10px);
+  border-radius:4px;position:relative;overflow:hidden
+}
+.team-card:hover{background:transparent;border-color:var(--border-hover);transform:translateY(-4px)}
+.team-card::before{
+  content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(200,168,233,.05),transparent);opacity:0;transition:opacity .3s;pointer-events:none
+}
+.team-card:hover::before{opacity:1}
+.team-img{width:200px;height:220px;border-radius:4px;object-fit:cover;margin:0 auto 1.5rem;transition:all .3s;position:relative;z-index:1}
+.team-card:hover .team-img{transform:scale(1.05);box-shadow:0 10px 30px rgba(58,29,90,.134)}
+.team-card h3{
+  font-family:'Momcake-Thin','Inter',sans-serif;font-size:var(--font-3xl);font-weight:800;margin-bottom:.5rem;color:var(--primary);letter-spacing:2.5px;position:relative;z-index:1
+}
+.team-role{color:var(--text-muted);font-size:var(--font-sm);margin-bottom:1rem;font-style:italic;position:relative;z-index:1}
+.team-details{color:var(--text-secondary);font-size:var(--font-sm);line-height:var(--leading-normal);position:relative;z-index:1}
+.team-details strong{color:var(--primary)}
+.alumni-card{background:linear-gradient(135deg,rgba(200,168,233,.1),rgba(183,148,230,.05));border:2px solid var(--primary)}
+.alumni-card:hover{background:linear-gradient(135deg,rgba(200,168,233,.2),rgba(183,148,230,.1));transform:translateY(-4px)}
+.alumni-card .team-img{border:2px solid var(--primary)}
 
-/* Main Hero Section (Index Page) */
-.header {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+/* Event Cards */
+.event-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:2rem;margin-top:4rem;padding:0 2rem}
+.event-card{
+  background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:12px;padding:3rem 2.5rem;text-align:center;transition:all .3s;backdrop-filter:blur(10px);
+  position:relative;overflow:hidden
+}
+.event-card:hover{background:rgba(255,255,255,.05);border-color:var(--border-hover);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.event-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(200,168,233,.03),transparent);opacity:0;transition:opacity .3s;pointer-events:none}
+.event-card:hover::before{opacity:1}
+.event-card h3{
+  font-family:'Momcake-Thin','Inter',sans-serif;font-size:var(--font-3xl);font-weight:400;margin-bottom:2rem;color:var(--primary);letter-spacing:2px;text-transform:uppercase;position:relative;z-index:1
+}
+.event-card p{
+  color:var(--text-secondary);font-size:var(--font-md);line-height:var(--leading-loose);margin-bottom:1.5rem;position:relative;z-index:1
+}
+.event-card p:last-child{margin-bottom:0}
+.event-card em{color:var(--primary);font-style:italic;font-weight:500}
+.event-card strong{color:var(--text-primary);font-weight:600}
+
+/*=============== 9) Music & Video ================*/
+.music-section{background:var(--bg);padding:8rem 0}
+.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:3rem;margin-top:4rem}
+.video-item{position:relative;overflow:hidden;border-radius:4px;transition:all .3s}
+.video-item iframe{width:100%;height:500px;border:none;border-radius:4px}
+
+/*=============== 10) Contact & Footer ================*/
+.contact-section{background:var(--bg);padding:6rem 0;text-align:center}
+.contact-content{max-width:600px;margin:0 auto}
+.contact-info{font-size:var(--font-xl);color:var(--text-secondary);line-height:var(--leading-loose);margin-bottom:3rem}
+
+.social-links{display:flex;justify-content:center;gap:3rem;margin:3rem 0;flex-wrap:wrap}
+.social-link{
+  width:80px;height:80px;border:2px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);
+  transition:all .3s;font-size:var(--font-2xl)
+}
+.social-link:hover{border-color:var(--primary);background:var(--primary);color:var(--bg);transform:translateY(-5px)}
+
+footer{
+  background:var(--bg)!important;padding:4rem 0 2rem!important;border-top:1px solid var(--border)!important;text-align:center
+}
+.footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:3rem;margin-bottom:3rem}
+.footer-section h4{
+  font-family:'Momcake-Thin','Inter',sans-serif;font-size:var(--font-md);font-weight:400;margin-bottom:1.5rem;color:var(--primary);letter-spacing:2px
+}
+.footer-section p,.footer-section a{
+  color:var(--text-muted)!important;font-size:var(--font-sm)!important;line-height:var(--leading-loose)!important;text-decoration:none!important
+}
+.footer-section a:hover{color:var(--primary)!important}
+.copyright{border-top:1px solid var(--border);padding-top:2rem;color:var(--text-muted)!important;font-size:var(--font-xs)!important}
+
+/*=============== 11) Buttons ================*/
+.btn-primary{
+  background:var(--primary);border:2px solid var(--primary);color:var(--bg);padding:1rem 2rem;font-weight:500;letter-spacing:1px;text-transform:uppercase;border-radius:4px;transition:all .3s;display:inline-block;font-size:var(--font-sm)
+}
+.btn-primary:hover{background:transparent;color:var(--primary)}
+.btn-outline{
+  background:transparent;border:2px solid var(--primary);color:var(--primary);padding:1rem 2rem;font-weight:500;letter-spacing:1px;text-transform:uppercase;border-radius:4px;transition:all .3s;display:inline-block;font-size:var(--font-sm)
+}
+.btn-outline:hover{background:var(--primary);color:var(--bg)}
+
+/*=============== 12) Utilities ================*/
+.fade-in{opacity:0;transform:translateY(30px);transition:all .8s}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+.text-center{text-align:center}
+.text-primary{color:var(--primary)!important}
+.text-secondary{color:var(--text-secondary)!important}
+.text-muted{color:var(--text-muted)!important}
+.underline,.underline-white{height:2px;width:50px;margin:0 auto 3rem}
+.underline{background-color:var(--primary)}
+.underline-white{background-color:var(--text-primary)}
+.purple{background:var(--primary)}
+.white{background:var(--text-primary)}
+.white2{color:var(--text-primary)}
+.black{color:var(--text-primary)}
+.dark-mode{color:var(--text-secondary)}
+.dark-mode a,.dark-mode b>a,.dark-mode div div p a{color:var(--primary)}
+
+/*=============== 13) Animations ================*/
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.animate-pulse{animation:pulse 2s infinite}
+
+/*=============== 14) About — Free, Full-Bleed Layout ================*/
+/* one consolidated block (removes old card look + adds refined spacing) */
+#about-description{
+    padding: clamp(7rem, 10vw, 12rem) 0 clamp(6rem, 8vw, 10rem);
     position: relative;
-    padding-top: 60px;
-    overflow: hidden;
+    /* strong top/bottom fade + side vignettes over the image */
+    background:
+      /* top → bottom fade (match site bg exactly) */
+      linear-gradient(
+        to bottom,
+        var(--bg) 0%,
+        rgba(10,10,10,0.98) 8%,
+        rgba(10,10,10,0.96) 16%,
+        rgba(10,10,10,0.90) 28%,
+        rgba(10,10,10,0.82) 40%,
+        rgba(10,10,10,0.82) 60%,
+        rgba(10,10,10,0.90) 72%,
+        rgba(10,10,10,0.96) 88%,
+        var(--bg) 100%
+      ),
+      /* side vignettes so only the center peeks */
+      radial-gradient(
+        120% 70% at 50% 50%,
+        rgba(10,10,10,0) 34%,
+        rgba(10,10,10,0.85) 65%,
+        rgba(10,10,10,1) 100%
+      ),
+      url('../images/dts-about-bg-semis.jpg') center/cover no-repeat;
+    background-color: var(--bg); /* hard fallback */
+  }
+#about-description .about-wrap{
+  max-width:1200px;margin:0 auto;padding-inline: clamp(16px, 4vw, 40px);
 }
 
-/* Video background styles */
-.video-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    object-fit: cover;
+/* “kill the card” */
+.about-description-container{
+  background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0 auto!important;backdrop-filter:none!important
+}
+.about-description-container::before{display:none!important}
+
+/* Overline / kicker */
+.about-kicker{
+  font-family:'Momcake-Bold','Inter',sans-serif;font-size:clamp(3rem, 8vw, 7rem);letter-spacing:.15em;line-height:var(--leading-tight);
+  color:rgba(255,255,255,.15);text-transform:uppercase;margin:0 0 2rem
+}
+/* Main statement */
+.about-lede{
+  font-family:'Momcake-Thin','Inter',sans-serif;font-size:clamp(1.9rem, 4.6vw, 3.2rem);letter-spacing:2.2px;line-height:1.28;color:var(--text-primary);
+  max-width:22ch;margin:0 0 clamp(1rem, 2.2vw, 2.25rem)
+}
+/* Two-column flow */
+.about-columns{
+  display:grid;grid-template-columns:1.15fr .85fr;column-gap:clamp(24px,4vw,56px);row-gap:clamp(16px,2vw,24px);align-items:start
+}
+.about-body{
+  max-width:62ch;font-size:clamp(1.05rem,1.35vw,1.25rem);line-height:1.78;color:var(--text-secondary)
+}
+.about-body p + p{margin-top:1rem}
+
+.about-aside{display:grid;row-gap:clamp(12px,1.6vw,20px)}
+.about-tag{font-size:.9rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted)}
+.about-aside-card{border-top:1px solid var(--border);padding-top:1rem;color:var(--text-secondary);font-size:clamp(.98rem,1.15vw,1.12rem)}
+.about-aside-card ul{list-style:none;margin:0;padding:0}
+.about-aside-card ul li{font-size:.95rem;line-height:1.6;border-bottom:1px solid rgba(255,255,255,.08);padding:.55rem 0}
+.about-aside-card ul li:last-child{border-bottom:none}
+
+/* Simple accent */
+.about-underline{width:60px;height:2px;background:var(--primary);margin:1rem 0 2rem;opacity:.7}
+
+/* Basic list style for highlights */
+.about-list{list-style:none;margin:0;padding:0}
+.about-list li{display:flex;gap:.5rem;line-height:1.6}
+.about-list li::before{content:"•";opacity:.6}
+
+/*=============== 15) Responsive Breakpoints ================*/
+/* Tablet ≤1024px : adjust font scale */
+@media (max-width:1024px){
+  :root{
+    --font-base: 1.1rem;
+    --font-lg: 1.5rem;
+    --font-xl: 1.7rem;
+    --font-2xl: 1.9rem;
+    --font-3xl: 2.3rem;
+  }
 }
 
-.video-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65));
-    z-index: 2;
+/* Mobile ≤768px */
+@media (max-width:768px){
+  :root{
+    --font-xs:.8rem;--font-sm:.9rem;--font-base:1rem;--font-md:1.2rem;--font-lg:1.3rem;--font-xl:1.4rem;
+    --font-2xl:1.6rem;--font-3xl:2rem;--font-4xl:2.5rem;--font-5xl:3rem;--font-6xl:4rem
+  }
+
+  .section{padding:4rem 0}
+  .section-subtitle{padding:0 1rem}
+  .about-grid{grid-template-columns:1fr;gap:1.5rem;margin-top:3rem}
+  .team-grid{grid-template-columns:1fr;gap:1.5rem;padding:0 1rem}
+  .team-img{width:160px;height:180px}
+  .about-content{padding:0 1rem}
+  .about-card{padding:2rem 1.5rem}
+  .contact-info{padding:0 1rem}
+  .video-grid{grid-template-columns:1fr;gap:2rem;margin-top:3rem;padding:0 1rem}
+  .video-item{position:relative;padding-bottom:56.25%;height:0;overflow:hidden}
+  .video-item iframe{position:absolute;top:0;left:0;width:100%;height:100%}
+  .social-links{gap:2rem}
+  .social-link{width:60px;height:60px;font-size:var(--font-lg)}
+  .footer-content{grid-template-columns:1fr;gap:2rem;padding:0 1rem}
+
+  .header-wrapper h1{font-size:clamp(4rem,8vw,5rem);letter-spacing:4.2px}
+  .header-wrapper p{letter-spacing:1px}
+
+  /* About section mobile */
+  #about-description{padding:6rem 0}
+  .about-columns{grid-template-columns:1fr;row-gap:2.25rem}
+  .about-lede{max-width:none}
+  .about-body{max-width:36ch;font-size:1.08rem;line-height:1.85}
+
+  /* Event cards mobile */
+  .event-grid{grid-template-columns:1fr;gap:1.5rem;padding:0 1rem}
+  .event-card{padding:2.5rem 2rem;border-radius:10px}
+  .event-card h3{font-size:var(--font-2xl);margin-bottom:1.5rem}
+  .event-card p{font-size:var(--font-base);margin-bottom:1.25rem}
 }
 
-/* Ensure hero content stays on top */
-.hero-content {
-    position: relative;
-    z-index: 10;
-    max-width: 800px;
-    padding: 0 2rem;
+/* Extra small ≤480px */
+@media (max-width:480px){
+  :root{
+    --font-xs:.75rem;--font-sm:.85rem;--font-base:.9rem;--font-md:1rem;--font-lg:1.1rem;--font-xl:1.3rem;
+    --font-2xl:1.4rem;--font-3xl:1.8rem;--font-4xl:2.2rem;--font-5xl:2.8rem;
+    --font-section: clamp(2rem, 8vw, 3.2rem);
+  }
+
+  .navbar-nav{margin:.5rem 1rem!important;padding:1rem!important}
+  .hero-title{letter-spacing:4px!important}
+  .hero-subtitle{letter-spacing:2px!important}
+  .video-item iframe{height:200px}
+  .social-link{width:50px;height:50px;font-size:var(--font-base)}
+
+  /* Mobile header fallback image */
+  .video-background{display:none!important}
+  .header{
+    background:url("../images/dts_index_bg_image.png") center/cover no-repeat!important;
+    background-attachment:scroll!important;padding-top:120px;min-height:100vh
+  }
+
+  /* About extra small tweaks */
+  #about-description{padding:7rem 0 6.5rem}
+  .about-body{max-width:34ch}
+  .about-aside-card ul li{padding:.6rem 0}
 }
 
-/* Other Page Headers - Consolidated Background Styles */
-.page-header {
-    min-height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding-top: 0 !important;
-    padding-bottom: 60px;
-    position: relative;
-    background-size: cover;
-    background-position: center;
-}
-
-/* Individual page backgrounds */
-.about-page .page-header {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.65)), url('../images/dts_about_bg_image.png');
-}
-
-.auditions-page .page-header {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.65)), url('../images/dts_auditions_bg_image.png');
-}
-
-.music-page .page-header {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.65)), url('../images/dts_music_bg_image.png');
-}
-
-/* Hero Content */
-.hero-content {
-    max-width: 800px;
-    z-index: 2;
-    padding: 0 2rem;
-}
-
-.hero-title {
-    font-family: 'Momcake-Bold', 'Inter', sans-serif;
-    font-size: clamp(4.5rem, 9vw, 8rem);
-    font-weight: 300;
-    letter-spacing: 1.1rem;
-    margin-bottom: 1rem;
-    opacity: 0;
-    animation: fadeInUp 1.5s ease 0.5s forwards;
-}
-
-.hero-subtitle {
-    font-size: 2rem;
-    font-weight: 600;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-    margin-bottom: 3rem;
-    opacity: 0;
-    animation: fadeInUp 1.5s ease 1s forwards;
-}
-
-.hero-cta {
-    display: inline-block;
-    padding: 1rem 3rem;
-    border: 2px solid var(--primary);
-    color: var(--primary);
-    text-decoration: none;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-size: 1.6rem;
-    transition: all 0.3s ease;
-    opacity: 0;
-    animation: fadeInUp 1.2s ease 1.2s forwards;
-}
-
-.hero-cta:hover {
-    background: var(--primary);
-    color: var(--bg);
-    text-decoration: none;
-}
-
-.center-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2rem;
-    width: 100%;
-}
-
-/* Header Wrapper for Other Pages */
-.header-wrapper h1 {
-    font-family: 'Momcake-Bold', 'Inter', sans-serif;
-    font-size: clamp(5rem, 5vw, 7rem);
-    letter-spacing: 1rem;
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-    opacity: 0;
-    animation: fadeInUp 1s ease forwards;
-}
-
-.header-wrapper p {
-    font-size: 2rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--primary);
-    opacity: 0;
-    animation: fadeInUp 1s ease 0.3s forwards;
-}
-
-/*=============== 7. Section Styles ================*/
-.section {
-    padding: 6rem 0;
-    position: relative;
-}
-
-.section-dark {
-    background: var(--bg-secondary);
-}
-
-.section-title {
-    font-family: 'Momcake-Thin', 'Inter', sans-serif !important;
-    font-size: clamp(2.5rem, 5vw, 4rem) !important;
-    font-weight: 300 !important;
-    text-align: center !important;
-    margin-bottom: 3rem !important;
-    color: var(--text-primary) !important;
-    letter-spacing: 4px !important;
-}
-
-.section-subtitle {
-    text-align: center;
-    font-size: 1.6rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 4rem;
-    line-height: 1.6;
-}
-
-.section:first-of-type {
-    margin-top: -1px;
-}
-
-/*=============== 8. About & Card Components ================*/
-.about-content {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 0 2rem;
-}
-
-.about-description {
-    font-size: 1.8rem;
-    color: var(--text-secondary);
-    line-height: 1.8;
-    margin-bottom: 4rem;
-}
-
-.about-description a {
-    color: var(--primary);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.about-description a:hover {
-    color: var(--primary-hover);
-}
-
-/* Card Grid Layouts */
-.about-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    margin-top: 4rem;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 4rem;
-    padding: 0 2rem;
-    justify-content: center;
-}
-
-/* Standard About Cards */
-.about-card {
-    background: rgba(255, 255, 255, 0.035);
-    border: 1px solid var(--border);
-    padding: 3rem 2rem;
-    text-align: center;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    border-radius: 4px;
-}
-
-.about-card:hover {
-    background: rgba(255, 255, 255, 0.005);
-    border-color: var(--border-hover);
-    transform: translateY(-3px);
-}
-
-.about-card h3 {
-    font-family: 'Momcake-Thin', 'Inter', sans-serif;
-    font-size: 2.2rem;
-    font-weight: 400;
-    margin-bottom: 1.5rem;
-    color: var(--primary);
-    letter-spacing: 2px;
-}
-
-.about-card p {
-    color: var(--text-secondary);
-    line-height: 1.8;
-    font-size: 1.5rem;
-}
-
-.about-card img {
-    width: 100%;
-    max-width: 300px;
-    border-radius: 4px;
-    margin-top: 2rem;
-    opacity: 0.9;
-    transition: opacity 0.3s ease;
-}
-
-.about-card:hover img {
+/* === Highlights bullets (single source of truth) === */
+:root{
+    --highlight-bullet-size: .36rem;
+    --highlight-bullet-gutter: 1rem;    /* text indent */
+    --highlight-bullet-outdent: .55rem; /* how far bullet sits OUTSIDE the column */
+  }
+  
+  .about-aside-card{ padding-left:0; } /* no horizontal padding on the container */
+  
+  .about-list.bullets{
+    list-style:none; margin:0; padding:0; /* no UA bullets/padding */
+  }
+  
+  .about-list.bullets li{
+    position:relative;
+    padding-left: var(--highlight-bullet-gutter);  /* text starts here */
+    margin: .55rem 0 .75rem;
+    line-height: 1.9;
+  }
+  
+  .about-list.bullets li::before{
+    content:"";
+    position:absolute;
+    left: 0rem;   /* was -0.5rem, moved 0.2rem right */
+    top: .92em;
+    width: .36rem;
+    height: .36rem;
+    border-radius:50%;
+    background: #fff; 
     opacity: 1;
-}
-
-/* Team Cards */
-.team-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--border);
-    padding: 2rem;
-    text-align: center;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    border-radius: 4px;
-    position: relative;
-    overflow: hidden;
-}
-
-.team-card:hover {
-    background: rgba(255, 255, 255, 0);
-    border-color: var(--border-hover);
-    transform: translateY(-4px);
-}
-
-.team-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(200, 168, 233, 0.05), transparent);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-}
-
-.team-card:hover::before {
-    opacity: 1;
-}
-
-.team-img {
-    width: 200px;
-    height: 220px;
-    border-radius: 4px;
-    object-fit: cover;
-    margin: 0 auto 1.5rem;
-    transition: all 0.3s ease;
-    position: relative;
-    z-index: 1;
-}
-
-.team-card:hover .team-img {
-    transform: scale(1.05);
-    box-shadow: 0 10px 30px rgba(58, 29, 90, 0.134);
-}
-
-.team-card h3 {
-    font-family: 'Momcake-Thin', 'Inter', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 0.5rem;
-    color: var(--primary);
-    letter-spacing: 2.5px;
-    position: relative;
-    z-index: 1;
-}
-
-.team-role {
-    color: var(--text-muted);
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-    font-style: italic;
-    position: relative;
-    z-index: 1;
-}
-
-.team-details {
-    color: var(--text-secondary);
-    font-size: 1rem;
-    line-height: 1.6;
-    position: relative;
-    z-index: 1;
-}
-
-.team-details strong {
-    color: var(--primary);
-}
-
-/* Alumni Card Special Styling */
-.alumni-card {
-    background: linear-gradient(135deg, rgba(200, 168, 233, 0.1), rgba(183, 148, 230, 0.05));
-    border: 2px solid var(--primary);
-}
-
-.alumni-card:hover {
-    background: linear-gradient(135deg, rgba(200, 168, 233, 0.2), rgba(183, 148, 230, 0.1));
-    transform: translateY(-4px);
-}
-
-.alumni-card .team-img {
-    border: 2px solid var(--primary);
-}
-
-/*=============== 9. Music & Video Sections ================*/
-.music-section {
-    background: var(--bg);
-    padding: 8rem 0;
-}
-
-.video-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 3rem;
-    margin-top: 4rem;
-}
-
-.video-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-}
-
-.video-item iframe {
-    width: 100%;
-    height: 500px;
-    border: none;
-    border-radius: 4px;
-}
-
-/*=============== 10. Contact Section ================*/
-.contact-section {
-    background: var(--bg);
-    padding: 6rem 0;
-    text-align: center;
-}
-
-.contact-content {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.contact-info {
-    font-size: 1.8rem;
-    color: var(--text-secondary);
-    line-height: 1.8;
-    margin-bottom: 3rem;
-}
-
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    margin: 3rem 0;
-    flex-wrap: wrap;
-}
-
-.social-link {
-    width: 80px;
-    height: 80px;
-    border: 2px solid var(--border);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    font-size: 2rem;
-}
-
-.social-link:hover {
-    border-color: var(--primary);
-    background: var(--primary);
-    color: var(--bg);
-    transform: translateY(-5px);
-    text-decoration: none;
-}
-
-/*=============== 11. Footer ================*/
-footer {
-    background: var(--bg) !important;
-    padding: 4rem 0 2rem !important;
-    border-top: 1px solid var(--border) !important;
-    text-align: center;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 3rem;
-    margin-bottom: 3rem;
-}
-
-.footer-section h4 {
-    font-family: 'Momcake-Thin', 'Inter', sans-serif;
-    font-size: 1.4rem;
-    font-weight: 400;
-    margin-bottom: 1.5rem;
-    color: var(--primary);
-    letter-spacing: 2px;
-}
-
-.footer-section p,
-.footer-section a {
-    color: var(--text-muted) !important;
-    font-size: 1rem !important;
-    line-height: 1.8 !important;
-    text-decoration: none !important;
-}
-
-.footer-section a:hover {
-    color: var(--primary) !important;
-}
-
-.copyright {
-    border-top: 1px solid var(--border);
-    padding-top: 2rem;
-    color: var(--text-muted) !important;
-    font-size: 0.9rem !important;
-}
-
-/*=============== 12. Button Components ================*/
-.btn-primary {
-    background: var(--primary);
-    border: 2px solid var(--primary);
-    color: var(--bg);
-    padding: 1rem 2rem;
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1rem;
-}
-
-.btn-primary:hover {
-    background: transparent;
-    color: var(--primary);
-    text-decoration: none;
-}
-
-.btn-outline {
-    background: transparent;
-    border: 2px solid var(--primary);
-    color: var(--primary);
-    padding: 1rem 2rem;
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1rem;
-}
-
-.btn-outline:hover {
-    background: var(--primary);
-    color: var(--bg);
-    text-decoration: none;
-}
-
-/*=============== 13. Utility Classes ================*/
-.fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.text-center {
-    text-align: center;
-}
-
-.text-primary {
-    color: var(--primary) !important;
-}
-
-.text-secondary {
-    color: var(--text-secondary) !important;
-}
-
-.text-muted {
-    color: var(--text-muted) !important;
-}
-
-/*=============== 14. Animations ================*/
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-}
-
-.animate-pulse {
-    animation: pulse 2s infinite;
-}
-
-/*=============== 15. Mobile Responsive ================*/
-@media (max-width: 768px) {
-    body {
-        font-size: 18px;
-    }
-    
-    p {
-        font-size: 1.2rem;
-    }
-
-    .hero-content {
-        padding: 0 1rem !important;
-        max-width: 100% !important;
-    }
-    
-    .hero-title {
-        font-size: clamp(6rem, 10vw, 4rem) !important;
-        letter-spacing: 4px !important;
-        line-height: 1.2 !important;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.4rem !important;
-        letter-spacing: 3px !important;
-        padding: 0 0.5rem !important;
-    }
-
-    .hero-cta {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-        font-size: 1rem;
-    }
-
-    .section {
-        padding: 4rem 0;
-    }
-    
-    .section-subtitle {
-        font-size: 1.2rem;
-        padding: 0 1rem;
-    }
-
-    .about-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        margin-top: 3rem;
-    }
-
-    .team-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        padding: 0 1rem;
-    }
-
-    .team-img {
-        width: 160px;
-        height: 180px;
-    }
-
-    .about-content {
-        padding: 0 1rem;
-    }
-    
-    .about-description {
-        font-size: 1.3rem;
-    }
-
-    .about-card {
-        padding: 2rem 1.5rem;
-    }
-
-    .about-card h3 {
-        font-size: 1.8rem;
-    }
-
-    .about-card p {
-        font-size: 1.2rem;
-    }
-    
-    .contact-info {
-        font-size: 1.3rem;
-        padding: 0 1rem;
-    }
-
-    .video-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        margin-top: 3rem;
-        padding: 0 1rem;
-    }
-
-    .video-item iframe {
-        height: 250px;
-    }
-
-    .social-links {
-        gap: 2rem;
-    }
-    
-    .social-link {
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
-    }
-
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        padding: 0 1rem;
-    }
-    
-    .footer-section h4 {
-        font-size: 1.3rem;
-    }
-    
-    .footer-section p,
-    .footer-section a {
-        font-size: 1rem !important;
-    }
-
-    .header-wrapper h1 {
-        font-size: clamp(5rem, 8vw, 4rem);
-        letter-spacing: 4.2px;
-    }
-
-    .header-wrapper p {
-        font-size: 1.4rem;
-        letter-spacing: 1px;
-    }
-}
-
-/* Extra small screens */
-@media (max-width: 480px) {
-    body {
-        font-size: 16px;
-    }
-
-    .navbar-nav {
-        margin: 0.5rem 1rem !important;
-        padding: 1rem !important;
-    }
-
-    .hero-title {
-        font-size: 4rem !important;
-        letter-spacing: 4px !important;
-    }
-
-    .hero-subtitle {
-        font-size: 1.1rem !important;
-        letter-spacing: 2px !important;
-    }
-
-    .about-card h3 {
-        font-size: 1.5rem;
-    }
-
-    .about-card p {
-        font-size: 1rem;
-    }
-
-    .section-title {
-        font-size: 3.2rem !important;
-        letter-spacing: 2px !important;
-    }
-
-    .video-item iframe {
-        height: 200px;
-    }
-
-    .social-link {
-        width: 50px;
-        height: 50px;
-        font-size: 1.2rem;
-    }
-
-    /* FIXED: Hide video and show static background for mobile */
-    .video-background {
-        display: none !important;
-    }
-    
-    .header {
-        /* Updated path - should be relative to CSS file location */
-        background: url("../images/dts_index_bg_image.png") !important;
-        background-size: cover !important;
-        background-position: center !important;
-        background-attachment: scroll !important;
-        background-repeat: no-repeat !important;
-        padding-top: 120px;
-        min-height: 100vh;
-    }
-}
-
-/*=============== 16. Bootstrap Compatibility Fixes ================*/
-/* Ensure Bootstrap classes work correctly */
-.collapse {
-    display: none;
-}
-
-.collapse.in {
-    display: block;
-}
-
-.collapsing {
-    height: 0;
-    overflow: hidden;
-    transition: height 0.35s ease;
-}
-
-/* Fix for Bootstrap navbar toggle functionality */
-.navbar-toggle[aria-expanded="true"] .icon-bar:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-
-.navbar-toggle[aria-expanded="true"] .icon-bar:nth-child(2) {
-    opacity: 0;
-}
-
-.navbar-toggle[aria-expanded="true"] .icon-bar:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
-}
-
-/* Ensure proper stacking context */
-.navbar {
-    z-index: 1030;
-}
-
-/*=============== 17. Legacy Compatibility Classes ================*/
-/* Keep some legacy styles for backward compatibility */
-.dark-mode {
-    color: var(--text-secondary);
-}
-
-.dark-mode > a,
-.dark-mode > b > a,
-.dark-mode > div > div > p > a {
-    color: var(--primary);
-}
-
-.underline {
-    height: 2px;
-    width: 50px;
-    margin: 0 auto 3rem;
-    background-color: var(--primary);
-}
-
-.underline-white {
-    height: 2px;
-    width: 50px;
-    margin: 0 auto 3rem;
-    background-color: var(--text-primary);
-}
-
-.purple { background: var(--primary); }
-.white { background: var(--text-primary); }
-.white2 { color: var(--text-primary); }
-.black { color: var(--text-primary); }
-
-/*=============== 18. Additional Mobile Improvements ================*/
-/* Improve touch targets on mobile */
-@media (max-width: 768px) {
-    a, button, .btn, .navbar-toggle {
-        min-height: 44px;
-        min-width: 44px;
-    }
-
-    /* Better spacing for mobile content */
-    .container {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-
-    /* Prevent horizontal scrolling */
-    body {
-        overflow-x: hidden;
-    }
-
-    /* Better mobile typography */
-    h1, h2, h3, h4, h5, h6 {
-        word-wrap: break-word;
-        hyphens: auto;
-    }
-
-    /* Mobile-friendly video embeds */
-    .video-item {
-        position: relative;
-        padding-bottom: 56.25%;
-        height: 0;
-        overflow: hidden;
-    }
-
-    .video-item iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-}
-
-/* High DPI display optimizations */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    /* Crisp borders and text on retina displays */
-    * {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-}
-
-/* Enhanced About Description Container */
-.about-description-container {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 4rem 3rem;
-    margin: 4rem auto;
-    backdrop-filter: blur(15px);
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.about-description-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-}
-
-.about-description-container:hover {
-    background: rgba(255, 255, 255, 0.005);
-    border-color: var(--border-hover);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.about-description-container:hover::before {
-    opacity: 1;
-}
-
-.about-description {
-    font-size: 1.8rem;
-    color: var(--text-secondary);
-    line-height: 1.8;
-    margin-bottom: 2rem;
-    position: relative;
-    z-index: 1;
-}
-
-.about-description:last-child {
-    margin-bottom: 0;
-}
-
-.about-description b {
-    color: var(--primary);
-    font-weight: 600;
-}
-
-.about-description a {
-    color: var(--primary);
-    text-decoration: none;
-    transition: color 0.3s ease;
-    font-weight: 500;
-}
-
-.about-description a:hover {
-    color: var(--primary-hover);
-}
-
-/* Mobile Responsive for About Description */
-@media (max-width: 768px) {
-    .about-description-container {
-        padding: 3rem 2rem;
-        margin: 3rem 1rem;
-        border-radius: 6px;
-    }
-    
-    .about-description {
-        font-size: 1.4rem;
-        line-height: 1.7;
-    }
-}
-
-@media (max-width: 480px) {
-    .about-description-container {
-        padding: 2.5rem 1.5rem;
-        margin: 2rem 0.5rem;
-    }
-    
-    .about-description {
-        font-size: 1.3rem;
-    }
-}
-
-/* AGGRESSIVE NAVBAR FIX - Add this at the very end of your CSS file */
-
-/* Force navbar to always be visible on all screen sizes above 768px */
-@media (min-width: 769px) {
-    /* Override Bootstrap's navbar-collapse hiding */
-    .navbar-collapse {
-        display: block !important;
-        height: auto !important;
-        padding: 0 !important;
-        border: none !important;
-        box-shadow: none !important;
-        overflow: visible !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        max-height: none !important;
-    }
-
-    /* Force navbar-nav to be visible */
-    .navbar-nav {
-        display: table !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        float: none !important;
-        margin: 0 auto !important;
-        table-layout: auto !important;
-        background: rgba(40, 40, 50, 0.7) !important;
-        backdrop-filter: blur(20px) saturate(180%) !important;
-        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-        border: 1px solid rgba(255, 255, 255, 0.15) !important;
-        border-radius: 50px !important;
-        padding: 0.5rem 1.5rem !important;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
-    }
-
-    /* Hide toggle button on desktop/tablet */
-    .navbar-toggle {
-        display: none !important;
-    }
-
-    /* Hide brand */
-    .navbar-brand {
-        display: none !important;
-    }
-
-    .navbar-header {
-        display: none !important;
-    }
-
-    /* Force show nav items */
-    .navbar-nav > li {
-        display: table-cell !important;
-        float: none !important;
-        visibility: visible !important;
-    }
-
-    .navbar-nav > li > a {
-        display: block !important;
-        visibility: visible !important;
-        color: rgba(255, 255, 255, 0.9) !important;
-        font-weight: 500 !important;
-        font-size: 1.2rem !important;
-        letter-spacing: 1px !important;
-        text-transform: uppercase !important;
-        padding: 0.75rem 2rem !important;
-        transition: all 0.3s ease !important;
-        border-radius: 30px !important;
-    }
-
-    .navbar-nav > li > a:hover,
-    .navbar-nav > li.active > a {
-        color: var(--text-primary) !important;
-        background: rgba(200, 168, 233, 0.2) !important;
-    }
-
-    /* Container adjustments */
-    .navbar .container {
-        width: 100% !important;
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-    }
-}
-
-/* Tablet-specific adjustments */
-@media (min-width: 769px) and (max-width: 991px) {
-    .navbar-nav > li > a {
-        font-size: 1.1rem !important;
-        padding: 0.6rem 1.5rem !important;
-    }
-    
-    .navbar-nav {
-        padding: 0.4rem 1.2rem !important;
-    }
-}
-
-/* Double-check: Force override any Bootstrap collapsing behavior */
-@media (min-width: 769px) {
-    .navbar-collapse.collapse {
-        display: block !important;
-        height: auto !important;
-    }
-    
-    .navbar-collapse.in {
-        display: block !important;
-        height: auto !important;
-    }
-    
-    .navbar-collapse.collapsing {
-        display: block !important;
-        height: auto !important;
-    }
-}
+  }
+  
+  /* make sure old divider style never sneaks back in */
+  .about-aside-card ul li{ border:0 !important; padding-top:0 !important; padding-bottom:0 !important; }

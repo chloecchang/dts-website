@@ -7,33 +7,174 @@
     <link rel="shortcut icon" type="image/jpg" href="assets/images/favicon/favicon.ico"/>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css?v=1.0">
-    <link rel="stylesheet" href="./assets/css/ionicons.min.css?v=1.0">
-    <link rel="stylesheet" href="./assets/css/owl.carousel.css?v=1.0">
-    <link rel="stylesheet" href="./assets/css/owl.theme.css?v=1.0">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css?v=2.0">
+    <link rel="stylesheet" href="./assets/css/ionicons.min.css?v=2.0">
+    <link rel="stylesheet" href="./assets/css/owl.carousel.css?v=2.0">
+    <link rel="stylesheet" href="./assets/css/owl.theme.css?v=2.0">
     <link rel="stylesheet" href="./assets/css/main.css?v=1.1">
     
     <style>
+        /* ==== Team bios: True 3D flip cards (integrates with your variables) ==== */
 
-        /* Ensure team cards are properly sized and responsive */
-        .team-grid {
-            display: grid;
+        .team-grid{
+            display:grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-            padding: 0 2rem;
-            justify-items: center;
+            gap:2rem;
+            margin-top:4rem;
+            padding:0 2rem;
+            justify-items:center;
         }
 
-        .team-card {
-            width: 100%;
-            max-width: 320px;
+        .flip-card{
+            width:100%;
+            max-width:320px;
+            height:400px;
+            perspective:1500px;
+            cursor:pointer;
+            position:relative;
+            background:transparent;
+            opacity:0;
+            transform:translateY(50px) rotateY(-15deg);
+            transition:opacity .8s ease, transform .8s ease;
+        }
+        .flip-card.visible{
+            opacity:1;
+            transform:translateY(0) rotateY(0deg);
         }
 
-        /* Alumni card maintains existing styling from main.css */
-        .alumni-card .team-details {
-            font-style: italic;
-            color: var(--text-muted);
+        .flip-card-inner{
+            position:relative;
+            width:100%;
+            height:100%;
+            transform-style:preserve-3d;
+            transform-origin:center center;
+            transition:transform .6s cubic-bezier(0.25,0.46,0.45,0.94);
+            border-radius:8px;
+        }
+        .flip-card.flipped .flip-card-inner{ transform: rotateY(180deg); }
+
+        .flip-face{
+            position:absolute;
+            inset:0;
+            backface-visibility:hidden;
+            -webkit-backface-visibility:hidden;
+            border-radius:8px;
+            padding:2rem;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            border:1px solid var(--border);
+            background: rgba(255,255,255,.035);
+            backdrop-filter: blur(10px);
+            overflow:hidden;
+            text-align:center;
+            transition: all .3s;
+        }
+        .flip-face.back{
+            transform: rotateY(180deg);
+            justify-content:flex-start;
+            padding-top:1.25rem;
+            background:
+                linear-gradient(135deg, rgba(200,168,233,.12), rgba(200,168,233,.04)),
+                rgba(10,10,10,.9);
+        }
+
+        .flip-card:hover .flip-card-inner{
+            transform: translateY(-8px) rotateX(5deg);
+        }
+        .flip-card.flipped:hover .flip-card-inner{
+            transform: translateY(-8px) rotateX(-5deg) rotateY(180deg);
+        }
+
+        .flip-photo{
+            width:160px;
+            height:180px;
+            border-radius:6px;
+            object-fit:cover;
+            object-position:center;
+            margin-bottom:1rem;
+            border:2px solid rgba(255,255,255,.15);
+            box-shadow:0 12px 28px rgba(0,0,0,.28);
+            transition: transform .3s, border-color .3s, box-shadow .3s;
+            position:relative;
+            z-index:1;
+        }
+        .flip-card:hover .flip-photo{
+            transform: translateZ(16px) scale(1.04);
+            box-shadow: 0 20px 45px rgba(0,0,0,.6);
+        }
+
+        .flip-name{
+            font-family:'Momcake-Thin','Inter',sans-serif;
+            font-size: var(--font-2xl);
+            font-weight:800;
+            letter-spacing:2px;
+            color:var(--primary);
+            margin-bottom:.5rem;
+            position:relative;
+            z-index:1;
+        }
+        .flip-role{
+            color:var(--text-muted);
+            font-size:var(--font-sm);
+            margin-bottom:1rem;
+            font-style:italic;
+            position:relative;
+            z-index:1;
+        }
+        .flip-front-details{
+            color:var(--text-secondary);
+            font-size:var(--font-sm);
+            line-height:var(--leading-normal);
+        }
+        .flip-front-details strong{ color: var(--primary); }
+
+        .flip-bio{
+            width:100%;
+            text-align:left;
+            font-size:var(--font-xs);
+            line-height:1.5;
+            color:var(--text-secondary);
+            overflow-y:auto;
+            padding-right:8px;
+        }
+        .flip-bio::-webkit-scrollbar{ width:4px; }
+        .flip-bio::-webkit-scrollbar-track{ background: rgba(255,255,255,.08); border-radius:2px; }
+        .flip-bio::-webkit-scrollbar-thumb{ background: rgba(200,168,233,.5); border-radius:2px; }
+
+        .bio-row{ display:flex; flex-wrap:wrap; gap:.4rem .6rem; margin-bottom:.8rem; }
+        .bio-label{ min-width:78px; color:var(--primary); font-weight:600; }
+        .bio-val{ color:var(--text-secondary); flex:1; }
+
+        .flip-hint{
+            position:absolute;
+            bottom:1rem;
+            right:1rem;
+            color:rgba(255,255,255,.65);
+            font-size:.8rem;
+            background: rgba(0,0,0,.28);
+            padding:4px 10px;
+            border-radius:12px;
+            backdrop-filter: blur(10px);
+            z-index:2;
+        }
+
+        /* Alumni: no flip */
+        .flip-card.alumni{ cursor:default; }
+        .flip-card.alumni .flip-card-inner{ transform:none !important; }
+        .flip-card.alumni .flip-face.back{ display:none; }
+
+        /* Mobile tweaks */
+        @media (max-width: 768px){
+            .flip-card{ height:380px; max-width:300px; perspective:1200px; }
+            .flip-photo{ width:140px; height:160px; }
+            .flip-name{ font-size: var(--font-xl); }
+        }
+        @media (max-width: 480px){
+            .flip-card{ height:360px; max-width:280px; perspective:1000px; }
+            .flip-face{ padding:1.5rem; }
+            .flip-photo{ width:120px; height:140px; }
         }
     </style>
 </head>
@@ -46,7 +187,7 @@
             <div class="container">
                 <!-- Brand -->
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -76,186 +217,459 @@
         </div>
     </section>
 
-    <!-- About Description Section -->
+    <!-- About Description -->
     <section id="about-description" class="section fade-in">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-description-container">
-                    <p class="about-description">
-                        Drawn to Scale (DTS) is <b>UC Berkeley's competitive co-ed a cappella group</b>, founded in 2008. We are a tight-knit community of passionate musicians and talented singers, dedicated to making great music while letting each of our members' unique styles shine. Our repertoire ranges from pop and indie to rock, R&B, and contemporary, brought to life through student-made arrangements and innovative choreography.
-                    </p>
-                    <p class="about-description">
-                        In February 2025, DTS become <b>two-time ICCA Semifinalists</b>, placing 2nd at the ICCA West Quarterfinal, and earning Best Choreography for the second year in a row (Choreography by: Kira Wefers '25, Ayanna Navarro '25, MJ Ordinario '27, Maddie McLaughlin '27). With these accomplishments, we're proud to represent UC Berkeley's growing a cappella community on the competitive stage and beyond.
-                    </p>
+        <div class="about-wrap">
+          <div class="about-description-container">
+            <h2 class="about-lede">
+                EST. 2008
+            </h2>
+            <div class="about-underline"></div>
+      
+            <div class="about-columns">
+              <!-- left: free-flow body -->
+              <div class="about-body">
+                <p>
+                  Drawn to Scale (DTS) is a tight-knit community of musicians and vocalists.
+                  Our repertoire ranges from pop and indie to rock, R&amp;B, and contemporary —
+                  brought to life through student-made arrangements and innovative choreography.
+                </p>
+                <p>
+                  In February 2025, we became <b>two-time ICCA semifinalists</b>, placing 2nd at the
+                  ICCA West Quarterfinal and earning <b>Best Choreography</b> for the second year in a row
+                  (Kira Wefers ’25, Ayanna Navarro ’25, MJ Ordinario ’27, Maddie McLaughlin ’27).
+                  We’re proud to represent UC Berkeley’s growing a cappella community on the competitive stage and beyond.
+                </p>
+              </div>
+      
+              <!-- right: light “aside” blocks like the inspo -->
+              <aside class="about-aside">
+                <div>
+                  <div class="about-tag">Highlights</div>
+                  <div class="about-aside-card">
+                    <ul class="about-list bullets">
+                      <li>ICCA 2025 Semifinalists — 2nd Place at ICCA West Quarterfinal Championship</li>
+                      <li>ICCA 2020 Semifinalists — 1st Place at ICCA West Quarterfinal Championship</li>
+                      <li>2x Best Choreography — ICCA West Quarterfinal Championship (2024 & 2025)</li>
+                      <li>Regular performances at California a cappella showcases, on-campus events, and off-campus gigs</li>
+                    </ul>
+                  </div>
                 </div>
+              </aside>
             </div>
+          </div>
         </div>
-    </section>
+      </section>
 
     <!-- Team Section -->
     <section id="team" class="section section-dark">
         <div class="container">
             <h2 class="section-title">Current Members</h2>
-            <p class="section-subtitle">Our Talented Team</p>
+            <p class="section-subtitle">Our Talented Team (Click to flip!)</p>
             
             <div class="team-grid">
                 <!-- Cayden Baldwin -->
-                <div class="team-card">
-                    <img src="./assets/images/members/avatar_cayden_baldwin.jpg" class="team-img" loading="lazy" alt="Cayden Baldwin">
-                    <h3>Cayden Baldwin</h3>
-                    <p class="team-role">Co-Administrative Director, Treasurer</p>
-                    <div class="team-details">
-                        <strong>Part:</strong> Bass<br>
-                        <strong>Year:</strong> 2027<br>
-                        <strong>Majors:</strong> Industrial Engineering & Operations Research, Electrical Engineering & Computer Science
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-face front">
+                            <img src="./assets/images/members/avatar_cayden_baldwin.jpg" class="flip-photo" loading="lazy" alt="Cayden Baldwin">
+                            <h3 class="flip-name">Cayden Baldwin</h3>
+                            <p class="flip-role">Co-Administrative Director, Treasurer</p>
+                            <div class="flip-front-details">
+                                <strong>Part:</strong> Bass<br>
+                                <strong>Year:</strong> 2027<br>
+                                <strong>Majors:</strong> Industrial Engineering &amp; Operations Research, Electrical Engineering &amp; Computer Science
+                            </div>
+                            <div class="flip-hint">Click to flip →</div>
+                        </div>
+                        <div class="flip-face back">
+                            <h3 class="flip-name" style="font-size: var(--font-xl); margin-bottom: .8rem;">Cayden Baldwin</h3>
+                            <div class="flip-bio">
+                                <div class="bio-row"><span class="bio-label">Tagline:</span><span class="bio-val">Recipient of “Uppy!” Award (he is very excited at the prospect of lifting someone in our set)</span></div>
+                                <div class="bio-row"><span class="bio-label">Part:</span><span class="bio-val">Bass</span></div>
+                                <div class="bio-row"><span class="bio-label">Year:</span><span class="bio-val">2027</span></div>
+                                <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2023</span></div>
+                                <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Industrial Engineering &amp; Operations Research + Electrical Engineering &amp; Computer Science</span></div>
+                                <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">Albany, CA</span></div>
+                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">recommend me anything and I’ll add it to my one 111hr playlist :)</span></div>
+                                <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">currently teaching myself html so I can make edits to this website, might be back later to write a longer bio</span></div>
+                                <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">im learning how to edit this website gimmie a bit</span></div>
+                            </div>
+                            <div class="flip-hint">← Click to flip back</div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- MJ Ordinario -->
-                <div class="team-card">
-                    <img src="./assets/images/members/avatar_mj_ordinario.jpg" class="team-img" loading="lazy" alt="MJ Ordinario">
-                    <h3>Mary Julie "MJ" Ordinario</h3>
-                    <p class="team-role">Co-Administrative Director</p>
-                    <div class="team-details">
-                        <strong>Part:</strong> Soprano/Mezzo<br>
-                        <strong>Year:</strong> 2027<br>
-                        <strong>Major:</strong> Music
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-face front">
+                            <img src="./assets/images/members/avatar_mj_ordinario.jpg" class="flip-photo" loading="lazy" alt="MJ Ordinario">
+                            <h3 class="flip-name">Mary Julie "MJ" Ordinario</h3>
+                            <p class="flip-role">Co-Administrative Director</p>
+                            <div class="flip-front-details">
+                                <strong>Part:</strong> Soprano/Mezzo<br>
+                                <strong>Year:</strong> 2027<br>
+                                <strong>Major:</strong> Music
+                            </div>
+                            <div class="flip-hint">Click to flip →</div>
+                        </div>
+                        <div class="flip-face back">
+                            <h3 class="flip-name" style="font-size: var(--font-xl); margin-bottom: .8rem;">MJ Ordinario</h3>
+                            <div class="flip-bio">
+                                <!-- No tagline shown -->
+                                <div class="bio-row"><span class="bio-label">Part:</span><span class="bio-val">Soprano/Mezzo</span></div>
+                                <div class="bio-row"><span class="bio-label">Year:</span><span class="bio-val">2027</span></div>
+                                <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2023</span></div>
+                                <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Music</span></div>
+                                <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">Bellflower, CA</span></div>
+                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">All of the above</span></div>
+                                <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">MJ can often be found wasting her time scrolling through homework tabs in MLK or locking in at her second home (Morrison/CCB practice rooms). She typically keeps her headphones on in public spaces, but if you stop and say hi, she’s more than willing to have a yap session!</span></div>
+                                <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">MJ becomes nocturnal regularly, especially over breaks.</span></div>
+                            </div>
+                            <div class="flip-hint">← Click to flip back</div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Visud Chang -->
-                <div class="team-card">
-                    <img src="./assets/images/members/avatar_visud_chang.jpg" class="team-img" loading="lazy" alt="Visud Chang">
-                    <h3>Visud Chang</h3>
-                    <p class="team-role">Co-Music Manager</p>
-                    <div class="team-details">
-                        <strong>Part:</strong> Baritone/Bass<br>
-                        <strong>Year:</strong> 2027<br>
-                        <strong>Major:</strong> Aerospace Engineering
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-face front">
+                            <img src="./assets/images/members/avatar_visud_chang.jpg" class="flip-photo" loading="lazy" alt="Visud Chang">
+                            <h3 class="flip-name">Visud Chang</h3>
+                            <p class="flip-role">Co-Music Manager</p>
+                            <div class="flip-front-details">
+                                <strong>Part:</strong> Baritone/Bass<br>
+                                <strong>Year:</strong> 2027<br>
+                                <strong>Major:</strong> Aerospace Engineering
+                            </div>
+                            <div class="flip-hint">Click to flip →</div>
+                        </div>
+                        <div class="flip-face back">
+                            <h3 class="flip-name" style="font-size: var(--font-xl); margin-bottom: .8rem;">Visud Chang</h3>
+                            <div class="flip-bio">
+                                <div class="bio-row"><span class="bio-label">Tagline:</span><span class="bio-val">Sauce Dropper</span></div>
+                                <div class="bio-row"><span class="bio-label">Part:</span><span class="bio-val">Baritone, Bass</span></div>
+                                <div class="bio-row"><span class="bio-label">Year:</span><span class="bio-val">2027</span></div>
+                                <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2023</span></div>
+                                <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Aerospace Engineering</span></div>
+                                <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">Long Beach, CA</span></div>
+                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">Pop, Jazz, Broadway, Piano</span></div>
+                                <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">Visud loves musical analysis and watches videos about breaking down songs for fun. He also recently got into pickleball, which he plays occasionally at the RSF (not to be confused with the RFS, where he builds rockets for fun). You can usually find Visud in MLK, where he studies, yaps, and eats Crumbl.</span></div>
+                                <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">Visud will play you any song in any style on piano if you ask him to!</span></div>
+                            </div>
+                            <div class="flip-hint">← Click to flip back</div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Izzy Flores -->
-                <div class="team-card">
-                    <img src="./assets/images/members/avatar_fa24-isabelle-flores.jpg" class="team-img" loading="lazy" alt="Isabelle Flores">
-                    <h3>Isabelle "Izzy" Flores</h3>
-                    <p class="team-role">Co-Music Manager</p>
-                    <div class="team-details">
-                        <strong>Part:</strong> Soprano<br>
-                        <strong>Year:</strong> 2028<br>
-                        <strong>Majors:</strong> Psychology, Legal Studies
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-face front">
+                            <img src="./assets/images/members/avatar_fa24-isabelle-flores.jpg" class="flip-photo" loading="lazy" alt="Isabelle Flores">
+                            <h3 class="flip-name">Isabelle "Izzy" Flores</h3>
+                            <p class="flip-role">Co-Music Manager</p>
+                            <div class="flip-front-details">
+                                <strong>Part:</strong> Soprano<br>
+                                <strong>Year:</strong> 2028<br>
+                                <strong>Majors:</strong> Psychology, Legal Studies
+                            </div>
+                            <div class="flip-hint">Click to flip →</div>
+                        </div>
+                        <div class="flip-face back">
+                            <h3 class="flip-name" style="font-size: var(--font-xl); margin-bottom: .8rem;">Izzy Flores</h3>
+                            <div class="flip-bio">
+                                <div class="bio-row"><span class="bio-label">Tagline:</span><span class="bio-val">Crumbl Sugar Mommy</span></div>
+                                <div class="bio-row"><span class="bio-label">Part:</span><span class="bio-val">Soprano</span></div>
+                                <div class="bio-row"><span class="bio-label">Year:</span><span class="bio-val">2028</span></div>
+                                <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2024</span></div>
+                                <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Psychology and Legal Studies</span></div>
+                                <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">La Verne, CA</span></div>
+                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">pop, indie, rnb, and jazz</span></div>
+                                <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">Izzy loves reading (literally loves it — she usually spends her free time reading if she’s not singing) and is a HUGE foodie! She’s down to try anything under the sun and a meal is really the key to her heart. She’s also a big yapper and loves making new friends! Her love language is quality time, so whether it’s going out or a night in, Izzy is always open to hanging out. She loves all things cute and cuddly and has a very interesting obsession with pink.</span></div>
+                                <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">Izzy owns every 2000s barbie movie on dvd and can give a synopsis of every one just based on the name 🙏</span></div>
+                            </div>
+                            <div class="flip-hint">← Click to flip back</div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Kaitlyn Yim -->
-                <div class="team-card">
-                    <img src="./assets/images/members/avatar_kaitlyn_yim.jpg" class="team-img" loading="lazy" alt="Kaitlyn Yim">
-                    <h3>Kaitlyn Yim</h3>
-                    <p class="team-role">Co-Publicity Manager</p>
-                    <div class="team-details">
-                        <strong>Part:</strong> Alto<br>
-                        <strong>Year:</strong> 2027<br>
-                        <strong>Major:</strong> Cognitive Science
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-face front">
+                            <img src="./assets/images/members/avatar_kaitlyn_yim.jpg" class="flip-photo" loading="lazy" alt="Kaitlyn Yim">
+                            <h3 class="flip-name">Kaitlyn Yim</h3>
+                            <p class="flip-role">Co-Publicity Manager</p>
+                            <div class="flip-front-details">
+                                <strong>Part:</strong> Alto<br>
+                                <strong>Year:</strong> 2027<br>
+                                <strong>Major:</strong> Cognitive Science
+                            </div>
+                            <div class="flip-hint">Click to flip →</div>
+                        </div>
+                        <div class="flip-face back">
+                            <h3 class="flip-name" style="font-size: var(--font-xl); margin-bottom: .8rem;">Kaitlyn Yim</h3>
+                            <div class="flip-bio">
+                                <div class="bio-row"><span class="bio-label">Tagline:</span><span class="bio-val">Crumbl Tuesday Wednesday Vlogger</span></div>
+                                <div class="bio-row"><span class="bio-label">Part:</span><span class="bio-val">Alto</span></div>
+                                <div class="bio-row"><span class="bio-label">Year:</span><span class="bio-val">2027</span></div>
+                                <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2023</span></div>
+                                <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Cognitive Science</span></div>
+                                <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">Castro Valley, CA</span></div>
+                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">RnB, Pop, House Music lol</span></div>
+                                <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">Kaitlyn loves anything and everything mango, cow, or jellycat related. Most of the time you’ll see her with her digi camera or a sweet treat. She’s always down to go out, yap about niche things, or spend her money on an overpriced rave!</span></div>
+                                <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">I’ve sprained my ankle 8 times in my life</span></div>
+                            </div>
+                            <div class="flip-hint">← Click to flip back</div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Chloe Chang -->
-                <div class="team-card">
-                    <img src="./assets/images/members/chloe-linkedin-2025.jpg" 
-                        class="team-img" 
-                        loading="lazy" 
-                        alt="Chloe Chang"
-                        style="filter: brightness(78%) contrast(118%);">
-                    <h3>Chloe Chang</h3>
-                    <p class="team-role">Co-Publicity Manager, Co-Business Manager, Webmaster :)</p>
-                    <div class="team-details">
-                        <strong>Part:</strong> Mezzo/Alto<br>
-                        <strong>Year:</strong> 2026<br>
-                        <strong>Major:</strong> Data Science
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-face front">
+                            <img src="./assets/images/members/chloe-linkedin-2025.jpg" 
+                                class="flip-photo" 
+                                loading="lazy" 
+                                alt="Chloe Chang"
+                                style="filter: brightness(78%) contrast(118%);">
+                            <h3 class="flip-name">Chloe Chang</h3>
+                            <p class="flip-role">Co-Publicity Manager, Co-Business Manager, Webmaster :)</p>
+                            <div class="flip-front-details">
+                                <strong>Part:</strong> Mezzo/Alto<br>
+                                <strong>Year:</strong> 2026<br>
+                                <strong>Major:</strong> Data Science &amp; Economics
+                            </div>
+                            <div class="flip-hint">Click to flip →</div>
+                        </div>
+                        <div class="flip-face back">
+                            <h3 class="flip-name" style="font-size: var(--font-xl); margin-bottom: .8rem;">Chloe Chang</h3>
+                            <div class="flip-bio">
+                                <div class="bio-row"><span class="bio-label">Tagline:</span><span class="bio-val">INSERT SOMETHING FUNNY</span></div>
+                                <div class="bio-row"><span class="bio-label">Part:</span><span class="bio-val">Mezzo/Alto</span></div>
+                                <div class="bio-row"><span class="bio-label">Year:</span><span class="bio-val">2026</span></div>
+                                <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2022</span></div>
+                                <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Data Science &amp; Economics</span></div>
+                                <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">St. Paul, MN</span></div>
+                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">Songs that make me feel like the main character looking out the car window while it’s raining</span></div>
+                                <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">Chloe is obsessed with watching documentaries and true crime shows. Don’t worry, she won’t murder anyone (at least, we don’t know if she has yet). She can draw a portrait of you in twenty minutes for free! You can find Chloe fast asleep on lawns across campus, the Bart, study lounges, or your shoulder. She prefers the title “Adult who knows all the lyrics to Disney songs” over “Disney Adult”. Lastly, Chloe is a very proud Minnesotan. Skol Vikings!</span></div>
+                                <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">Taylor Swift is 5’11”!</span></div>
+                            </div>
+                            <div class="flip-hint">← Click to flip back</div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Sathvik Appana -->
-                <div class="team-card">
-                    <img src="./assets/images/members/avatar_fa24-sathvik-appana.jpg" class="team-img" loading="lazy" alt="Sathvik Appana">
-                    <h3>Sathvik Appana</h3>
-                    <p class="team-role">Co-Business Manager</p>
-                    <div class="team-details">
-                        <strong>Part:</strong> Baritone/Tenor<br>
-                        <strong>Year:</strong> 2028<br>
-                        <strong>Majors:</strong> EECS, Business (MET)
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-face front">
+                            <img src="./assets/images/members/avatar_fa24-sathvik-appana.jpg" class="flip-photo" loading="lazy" alt="Sathvik Appana">
+                            <h3 class="flip-name">Sathvik Appana</h3>
+                            <p class="flip-role">Co-Business Manager</p>
+                            <div class="flip-front-details">
+                                <strong>Part:</strong> Tenor/Baritone<br>
+                                <strong>Year:</strong> 2028<br>
+                                <strong>Majors:</strong> EECS, Business (MET)
+                            </div>
+                            <div class="flip-hint">Click to flip →</div>
+                        </div>
+                        <div class="flip-face back">
+                            <h3 class="flip-name" style="font-size: var(--font-xl); margin-bottom: .8rem;">Sathvik Appana</h3>
+                            <div class="flip-bio">
+                                <div class="bio-row"><span class="bio-label">Tagline:</span><span class="bio-val">Resident Boy Band Member</span></div>
+                                <div class="bio-row"><span class="bio-label">Part:</span><span class="bio-val">Tenor/Baritone</span></div>
+                                <div class="bio-row"><span class="bio-label">Year:</span><span class="bio-val">2028</span></div>
+                                <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2024</span></div>
+                                <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">EECS + Business</span></div>
+                                <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">Lexington, MA</span></div>
+                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">Guitar stuff, lowkey anything genre wise (my wrapped is fr all over the place)</span></div>
+                                <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">Sathvik got too lazy to make a bio</span></div>
+                                <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">1:30 AM bagels hitttt</span></div>
+                            </div>
+                            <div class="flip-hint">← Click to flip back</div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Jules Moschetti -->
-                <div class="team-card">
-                    <img src="./assets/images/members/avatar_jules_moschetti.jpg" class="team-img" loading="lazy" alt="Jules Moschetti">
-                    <h3>Juliette "Jules" Moschetti</h3>
-                    <p class="team-role">Co-Social Manager</p>
-                    <div class="team-details">
-                        <strong>Part:</strong> Alto<br>
-                        <strong>Year:</strong> 2026<br>
-                        <strong>Major:</strong> Public Health
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-face front">
+                            <img src="./assets/images/members/avatar_jules_moschetti.jpg" class="flip-photo" loading="lazy" alt="Jules Moschetti">
+                            <h3 class="flip-name">Juliette "Jules" Moschetti</h3>
+                            <p class="flip-role">Co-Social Manager</p>
+                            <div class="flip-front-details">
+                                <strong>Part:</strong> Alto<br>
+                                <strong>Year:</strong> 2026<br>
+                                <strong>Major:</strong> Public Health &amp; Ancient Greek and Roman Studies
+                            </div>
+                            <div class="flip-hint">Click to flip →</div>
+                        </div>
+                        <div class="flip-face back">
+                            <h3 class="flip-name" style="font-size: var(--font-xl); margin-bottom: .8rem;">Jules Moschetti</h3>
+                            <div class="flip-bio">
+                                <div class="bio-row"><span class="bio-label">Tagline:</span><span class="bio-val">Most likely to be canceled on twitter</span></div>
+                                <div class="bio-row"><span class="bio-label">Part:</span><span class="bio-val">Alto</span></div>
+                                <div class="bio-row"><span class="bio-label">Year:</span><span class="bio-val">2026</span></div>
+                                <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Spring 2023</span></div>
+                                <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Public Health and Ancient Greek and Roman Studies</span></div>
+                                <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">Napa, CA</span></div>
+                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">I love all music, especially cinematic scores</span></div>
+                                <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">Juliette is obsessed with fantastical period pieces like Outlander and Game of Thrones. She enjoys spending her time collecting and playing Pokemon, and baking various goods.</span></div>
+                                <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">Juliette is a French dual-citizen who loves to travel.</span></div>
+                            </div>
+                            <div class="flip-hint">← Click to flip back</div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Nate Feinland -->
-                <div class="team-card">
-                    <img src="./assets/images/members/avatar_fa24-nate-feinland.jpg" class="team-img" loading="lazy" alt="Nate Feinland">
-                    <h3>Nate Feinland</h3>
-                    <p class="team-role">Co-Social Manager</p>
-                    <div class="team-details">
-                        <strong>Part:</strong> Tenor<br>
-                        <strong>Year:</strong> 2028<br>
-                        <strong>Major:</strong> Psychology
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-face front">
+                            <img src="./assets/images/members/avatar_fa24-nate-feinland.jpg" class="flip-photo" loading="lazy" alt="Nate Feinland">
+                            <h3 class="flip-name">Nate Feinland</h3>
+                            <p class="flip-role">Co-Social Manager</p>
+                            <div class="flip-front-details">
+                                <strong>Part:</strong> Tenor 1<br>
+                                <strong>Year:</strong> 2027<br>
+                                <strong>Major:</strong> Psychology
+                            </div>
+                            <div class="flip-hint">Click to flip →</div>
+                        </div>
+                        <div class="flip-face back">
+                            <h3 class="flip-name" style="font-size: var(--font-xl); margin-bottom: .8rem;">Nate Feinland</h3>
+                            <div class="flip-bio">
+                                <div class="bio-row"><span class="bio-label">Tagline:</span><span class="bio-val">Secret Theater Kid</span></div>
+                                <div class="bio-row"><span class="bio-label">Part:</span><span class="bio-val">Tenor 1</span></div>
+                                <div class="bio-row"><span class="bio-label">Year:</span><span class="bio-val">2027</span></div>
+                                <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2024</span></div>
+                                <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Psychology</span></div>
+                                <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">Albany, CA</span></div>
+                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">Drake and Justin Bieber Enthusiast. I love rnb artists such as Brent Faiyaz and Daniel Caesar. I also love indie artists such as Beabadoobee and TV Girl.</span></div>
+                                <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">I am a classically trained violinist of 13 years. I was introduced to singing when my Dad started to sign me up for musical theater camps as a little kid. I wanted to do acapella because i watch pitch perfect and it looked cool.</span></div>
+                                <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">I’m teaching myself the guitar</span></div>
+                            </div>
+                            <div class="flip-hint">← Click to flip back</div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Madison McLaughlin -->
-                <div class="team-card">
-                    <img src="./assets/images/members/avatar_madison_mclaughlin.jpg" class="team-img" loading="lazy" alt="Madison McLaughlin">
-                    <h3>Madison "Maddie" McLaughlin</h3>
-                    <p class="team-role">Music Team</p>
-                    <div class="team-details">
-                        <strong>Part:</strong> Soprano<br>
-                        <strong>Year:</strong> 2027<br>
-                        <strong>Major:</strong> Music
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-face front">
+                            <img src="./assets/images/members/avatar_madison_mclaughlin.jpg" class="flip-photo" loading="lazy" alt="Madison McLaughlin">
+                            <h3 class="flip-name">Madison "Maddie" McLaughlin</h3>
+                            <p class="flip-role">Music Team</p>
+                            <div class="flip-front-details">
+                                <strong>Part:</strong> Soprano<br>
+                                <strong>Year:</strong> Spring 2027<br>
+                                <strong>Majors:</strong> Music Theater and Performance Studies
+                            </div>
+                            <div class="flip-hint">Click to flip →</div>
+                        </div>
+                        <div class="flip-face back">
+                            <h3 class="flip-name" style="font-size: var(--font-xl); margin-bottom: .8rem;">Maddie McLaughlin</h3>
+                            <div class="flip-bio">
+                                <div class="bio-row"><span class="bio-label">Tagline:</span><span class="bio-val">Most likely to strangle someone with the bows in her hair</span></div>
+                                <div class="bio-row"><span class="bio-label">Part:</span><span class="bio-val">Soprano</span></div>
+                                <div class="bio-row"><span class="bio-label">Year:</span><span class="bio-val">Spring 2027</span></div>
+                                <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2023</span></div>
+                                <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Music Theater and Performance Studies</span></div>
+                                <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">Simi Valley, CA</span></div>
+                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">Pop, indie, rock and jazz are Maddie’s favorite genres! Maddie also plays the piano and the guitar and likes to write her own music!</span></div>
+                                <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">Maddie loves to make jewelry, crochet, read, or hang out with friends! You can find Maddie in the Morrison practice rooms quite often (the life of a music major). When Maddie is not practicing, she likes to spend time soaking in the sun or drinking boba on the Glade. Lastly, Maddie loves warm hugs 🤗.</span></div>
+                                <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">Maddie’s spirit animal is a butterfly, some call her “Mariposa Maddie.”</span></div>
+                            </div>
+                            <div class="flip-hint">← Click to flip back</div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Marcus Espinosa -->
-                <div class="team-card">
-                    <img src="./assets/images/members/avatar_marcus_espinosa.jpg" class="team-img" loading="lazy" alt="Marcus Espinosa">
-                    <h3>Marcus Espinosa</h3>
-                    <p class="team-role">Music Team</p>
-                    <div class="team-details">
-                        <strong>Part:</strong> Bass<br>
-                        <strong>Year:</strong> 2027<br>
-                        <strong>Majors:</strong> Sociology, Cognitive Science
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-face front">
+                            <img src="./assets/images/members/avatar_marcus_espinosa.jpg" class="flip-photo" loading="lazy" alt="Marcus Espinosa">
+                            <h3 class="flip-name">Marcus Espinosa</h3>
+                            <p class="flip-role">Music Team</p>
+                            <div class="flip-front-details">
+                                <strong>Part:</strong> Baritone/Bass<br>
+                                <strong>Year:</strong> 2027<br>
+                                <strong>Majors:</strong> Cognitive Science, Sociology (minor in Data Sciences)
+                            </div>
+                            <div class="flip-hint">Click to flip →</div>
+                        </div>
+                        <div class="flip-face back">
+                            <h3 class="flip-name" style="font-size: var(--font-xl); margin-bottom: .8rem;">Marcus Espinosa</h3>
+                            <div class="flip-bio">
+                                <div class="bio-row"><span class="bio-label">Tagline:</span><span class="bio-val">D1 food vacuum &amp; best lookalike to that one yellow thing from Horton Hears a Who</span></div>
+                                <div class="bio-row"><span class="bio-label">Part:</span><span class="bio-val">Baritone, Bass</span></div>
+                                <div class="bio-row"><span class="bio-label">Year:</span><span class="bio-val">2027</span></div>
+                                <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2023</span></div>
+                                <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Cognitive Science, Sociology, and minor in Data Sciences</span></div>
+                                <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">Valencia, CA</span></div>
+                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">Bruno Mars, Pop/Rnb</span></div>
+                                <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">Marcus is lowkey into everything. He especially loves sports, mainly basketball and football, but all sports are enjoyed. If you wanna yap about the cinematography of the recent Marvel movie he will also give you too strong of an opinion. Also a certified big back.</span></div>
+                                <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">Marcus can place every country in Asia on a map.</span></div>
+                            </div>
+                            <div class="flip-hint">← Click to flip back</div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Moore Theobald -->
-                <div class="team-card">
-                    <img src="./assets/images/members/avatar_moore-theobald-sp25.png" class="team-img" loading="lazy" alt="Moore Theobald">
-                    <h3>Moore Theobald</h3>
-                    <p class="team-role">Will Climb That Tree</p>
-                    <div class="team-details">
-                        <strong>Part:</strong> Tenor/Baritone<br>
-                        <strong>Year:</strong> 2026<br>
-                        <strong>Majors:</strong> Computer Science, Music
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-face front">
+                            <img src="./assets/images/members/avatar_moore-theobald-sp25.png" class="flip-photo" loading="lazy" alt="Moore Theobald">
+                            <h3 class="flip-name">Moore Theobald</h3>
+                            <p class="flip-role">Will Climb That Tree</p>
+                            <div class="flip-front-details">
+                                <strong>Part:</strong> Tenor/Baritone<br>
+                                <strong>Year:</strong> 2026<br>
+                                <strong>Majors:</strong> Music, Computer Science
+                            </div>
+                            <div class="flip-hint">Click to flip →</div>
+                        </div>
+                        <div class="flip-face back">
+                            <h3 class="flip-name" style="font-size: var(--font-xl); margin-bottom: .8rem;">Moore Theobald</h3>
+                            <div class="flip-bio">
+                                <div class="bio-row"><span class="bio-label">Tagline:</span><span class="bio-val">Was a Monkey in his Past Life</span></div>
+                                <div class="bio-row"><span class="bio-label">Part:</span><span class="bio-val">Tenor, Baritone</span></div>
+                                <div class="bio-row"><span class="bio-label">Year:</span><span class="bio-val">2026</span></div>
+                                <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2022</span></div>
+                                <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Music, Computer Science</span></div>
+                                <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">Greenlawn, NY</span></div>
+                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">Expression, authenticity, cool beats and grooves</span></div>
+                                <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">Moore Theobald is a third year hailing from the suburbs of New York City. He enjoys climbing things and learning as many random semi-useful skills as possible. He would have written moore but he wanted to keep his bio short at only fifty words or less so he</span></div>
+                                <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">The airspeed velocity of an unladen European swallow is ~20.1 mph</span></div>
+                            </div>
+                            <div class="flip-hint">← Click to flip back</div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Alumni -->
-                <div class="team-card alumni-card">
-                    <img src="./assets/images/archive/about-2fa17.jpg" class="team-img" loading="lazy" alt="Alumni">
-                    <h3>Alumni ♥</h3>
-                    <p class="team-role">Forever Part of Our Family</p>
-                    <div class="team-details">
-                        [COMING SOON] Check out our amazing alumni who helped build the legacy of Drawn to Scale!
+                <!-- Alumni (no flip) -->
+                <div class="flip-card alumni">
+                    <div class="flip-card-inner">
+                        <div class="flip-face front">
+                            <img src="./assets/images/archive/about-2fa17.jpg" class="flip-photo" loading="lazy" alt="Alumni">
+                            <h3 class="flip-name">Alumni ♥</h3>
+                            <p class="flip-role">Forever Part of Our Family</p>
+                            <div class="flip-front-details">
+                                [COMING SOON] Check out our amazing alumni who helped build the legacy of Drawn to Scale!
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -273,13 +687,13 @@
                 </div>
                 
                 <div class="social-links">
-                    <a href="https://www.youtube.com/user/dtsacapella" class="social-link">
+                    <a href="https://www.youtube.com/user/dtsacapella" class="social-link" aria-label="YouTube">
                         <i class="ion-social-youtube"></i>
                     </a>
-                    <a href="https://www.instagram.com/drawntoscaleberkeley/" class="social-link">
+                    <a href="https://www.instagram.com/drawntoscaleberkeley/" class="social-link" aria-label="Instagram">
                         <i class="ion-social-instagram"></i>
                     </a>
-                    <a href="https://www.facebook.com/drawntoscaleberkeley" class="social-link">
+                    <a href="https://www.facebook.com/drawntoscaleberkeley" class="social-link" aria-label="Facebook">
                         <i class="ion-social-facebook"></i>
                     </a>
                 </div>
@@ -309,53 +723,56 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="./assets/js/jquery-1.11.2.min.js?v=1.0"></script>
-    <script src="./assets/js/bootstrap.min.js?v=1.0"></script>
-    <script src="./assets/js/owl.carousel.min.js?v=1.0"></script>
+    <script src="./assets/js/jquery-1.11.2.min.js?v=2.0"></script>
+    <script src="./assets/js/bootstrap.min.js?v=2.0"></script>
+    <script src="./assets/js/owl.carousel.min.js?v=2.0"></script>
     <script src="./assets/js/contact.js?v=1.0"></script>
     <script src="./assets/js/script.js?v=1.0"></script>
 
     <script>
+        // Flip card handlers + a11y
+        function toggleFlip(card){
+            if(card.classList.contains('alumni')) return; // don't flip alumni
+            card.classList.toggle('flipped');
+        }
+
+        // init flip interactions + ARIA
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.flip-card').forEach((card, i) => {
+                card.setAttribute('tabindex','0');
+                card.setAttribute('role','button');
+                card.setAttribute('aria-label', `Member card ${i+1}. Press Enter or Space to flip and view details.`);
+                card.addEventListener('click', () => toggleFlip(card));
+                card.addEventListener('keydown', (e) => {
+                    if(e.key === 'Enter' || e.key === ' '){
+                        e.preventDefault();
+                        toggleFlip(card);
+                    }
+                });
+            });
+        });
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
 
-        // Fade in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
+        // Fade-in observer for sections
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
         }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
+        document.querySelectorAll('.fade-in, .flip-card').forEach(el => observer.observe(el));
 
         // Header background on scroll
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar-default');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
         });
     </script>
 </body>
