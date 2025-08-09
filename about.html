@@ -176,6 +176,72 @@
             .flip-face{ padding:1.5rem; }
             .flip-photo{ width:120px; height:140px; }
         }
+
+        /* === flip card typography: better sizes + spacing === */
+        .flip-face{
+        padding: 2.2rem 2rem;           /* a hair more breathing room */
+        }
+
+        /* === bigger, clearer card name === */
+        .flip-name{
+        font-family: 'Momcake-Bold','Inter',sans-serif; /* was Thin */
+        font-size: clamp(1.4rem, 1.1rem + 1.6vw, 2.2rem); /* bigger across breakpoints */
+        font-weight: 900;
+        letter-spacing: 1px;   /* a bit tighter so it doesn’t look spaced out */
+        line-height: 1.1;
+        }
+
+        .flip-role{
+        font-size: clamp(0.95rem, 0.85rem + 0.35vw, 1.15rem);
+        line-height: 1.35;
+        margin-bottom: 0.9rem;
+        }
+
+        .flip-front-details{
+        font-size: clamp(0.98rem, 0.9rem + 0.3vw, 1.12rem);
+        line-height: 1.55;
+        }
+
+        .flip-front-details strong{
+        font-weight: 700;
+        }
+
+        .flip-bio{
+        font-size: clamp(0.98rem, 0.9rem + 0.35vw, 1.12rem);
+        line-height: 1.6;
+        }
+
+        .bio-label{
+        font-size: clamp(0.98rem, 0.92rem + 0.25vw, 1.08rem);
+        font-weight: 700;
+        min-width: 92px;               /* widen so labels don’t wrap too soon */
+        }
+
+        .bio-val{
+        font-size: clamp(0.98rem, 0.92rem + 0.35vw, 1.12rem);
+        }
+
+        .flip-hint{
+        font-size: clamp(0.85rem, 0.78rem + 0.25vw, 0.95rem);
+        padding: 6px 12px;
+        }
+
+        /* keep the back-face title large too */
+        .flip-face.back .flip-name{
+        font-family: 'Momcake-Bold','Inter',sans-serif;
+        font-size: clamp(1.3rem, 1rem + 1.4vw, 2rem) !important;
+        font-weight: 900;
+        letter-spacing: 1px;
+        }
+
+        /* mobile tweaks so nothing feels cramped */
+        @media (max-width: 768px){
+        .flip-face{ padding: 1.8rem; }
+        }
+
+        @media (max-width: 480px){
+        .flip-face{ padding: 1.6rem; }
+        }
     </style>
 </head>
 
@@ -217,55 +283,57 @@
         </div>
     </section>
 
+    <section class="section-break" aria-hidden="true"></section>
+
     <!-- About Description -->
-    <section id="about-description" class="section fade-in">
-        <div class="about-wrap">
-          <div class="about-description-container">
-            <h2 class="about-lede">
-                EST. 2008
+    <section class="hero-section hero-about section fade-in">
+        <div class="hero-wrap">
+        <div class="hero-content-container">
+            <h2 class="hero-lede">
+            EST. 2008
             </h2>
-            <div class="about-underline"></div>
-      
-            <div class="about-columns">
-              <!-- left: free-flow body -->
-              <div class="about-body">
+            <div class="hero-underline"></div>
+    
+            <div class="hero-columns">
+            <!-- left: free-flow body -->
+            <div class="hero-body">
                 <p>
-                  Drawn to Scale (DTS) is a tight-knit community of musicians and vocalists.
-                  Our repertoire ranges from pop and indie to rock, R&amp;B, and contemporary —
-                  brought to life through student-made arrangements and innovative choreography.
+                Drawn to Scale (DTS) is a tight-knit community of musicians and vocalists.
+                Our repertoire ranges from pop and indie to rock, R&amp;B, and contemporary —
+                brought to life through student-made arrangements and innovative choreography.
                 </p>
                 <p>
-                  In February 2025, we became <b>two-time ICCA semifinalists</b>, placing 2nd at the
-                  ICCA West Quarterfinal and earning <b>Best Choreography</b> for the second year in a row
-                  (Kira Wefers ’25, Ayanna Navarro ’25, MJ Ordinario ’27, Maddie McLaughlin ’27).
-                  We’re proud to represent UC Berkeley’s growing a cappella community on the competitive stage and beyond.
+                In February 2025, we became <b>two-time ICCA semifinalists</b>, placing 2nd at the
+                ICCA West Quarterfinal and earning <b>Best Choreography</b> for the second year in a row
+                (Kira Wefers '25, Ayanna Navarro '25, MJ Ordinario '27, Maddie McLaughlin '27).
+                We're proud to represent UC Berkeley's growing a cappella community on the competitive stage and beyond.
                 </p>
-              </div>
-      
-              <!-- right: light “aside” blocks like the inspo -->
-              <aside class="about-aside">
-                <div>
-                  <div class="about-tag">Highlights</div>
-                  <div class="about-aside-card">
-                    <ul class="about-list bullets">
-                      <li>ICCA 2025 Semifinalists — 2nd Place at ICCA West Quarterfinal Championship</li>
-                      <li>ICCA 2020 Semifinalists — 1st Place at ICCA West Quarterfinal Championship</li>
-                      <li>2x Best Choreography — ICCA West Quarterfinal Championship (2024 & 2025)</li>
-                      <li>Regular performances at California a cappella showcases, on-campus events, and off-campus gigs</li>
-                    </ul>
-                  </div>
-                </div>
-              </aside>
             </div>
-          </div>
+    
+            <!-- right: light "aside" blocks -->
+            <aside class="hero-aside">
+                <div>
+                <div class="hero-tag">Highlights</div>
+                <div class="hero-aside-card">
+                    <ul class="hero-list bullets">
+                    <li>ICCA 2025 Semifinalists — 2nd Place at ICCA West Quarterfinal Championship</li>
+                    <li>ICCA 2020 Semifinalists — 1st Place at ICCA West Quarterfinal Championship</li>
+                    <li>2x Best Choreography — ICCA West Quarterfinal Championship (2024 & 2025)</li>
+                    <li>Regular performances at California a cappella showcases, on-campus events, and off-campus gigs</li>
+                    </ul>
+                </div>
+                </div>
+            </aside>
+            </div>
         </div>
-      </section>
+        </div>
+    </section>
 
     <!-- Team Section -->
     <section id="team" class="section section-dark">
         <div class="container">
             <h2 class="section-title">Current Members</h2>
-            <p class="section-subtitle">Our Talented Team (Click to flip!)</p>
+            <p class="section-subtitle">Our Team</p>
             
             <div class="team-grid">
                 <!-- Cayden Baldwin -->
@@ -291,7 +359,7 @@
                                 <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2023</span></div>
                                 <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Industrial Engineering &amp; Operations Research + Electrical Engineering &amp; Computer Science</span></div>
                                 <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">Albany, CA</span></div>
-                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">recommend me anything and I’ll add it to my one 111hr playlist :)</span></div>
+                                <div class="bio-row"><span class="bio-label">Music Interests:</span><span class="bio-val">recommend me anything and I’ll add it to my one 111hr playlist :)</span></div>
                                 <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">currently teaching myself html so I can make edits to this website, might be back later to write a longer bio</span></div>
                                 <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">im learning how to edit this website gimmie a bit</span></div>
                             </div>
@@ -323,7 +391,7 @@
                                 <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2023</span></div>
                                 <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Music</span></div>
                                 <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">Bellflower, CA</span></div>
-                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">All of the above</span></div>
+                                <div class="bio-row"><span class="bio-label">Music Interests:</span><span class="bio-val">All of the above</span></div>
                                 <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">MJ can often be found wasting her time scrolling through homework tabs in MLK or locking in at her second home (Morrison/CCB practice rooms). She typically keeps her headphones on in public spaces, but if you stop and say hi, she’s more than willing to have a yap session!</span></div>
                                 <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">MJ becomes nocturnal regularly, especially over breaks.</span></div>
                             </div>
@@ -355,7 +423,7 @@
                                 <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2023</span></div>
                                 <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Aerospace Engineering</span></div>
                                 <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">Long Beach, CA</span></div>
-                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">Pop, Jazz, Broadway, Piano</span></div>
+                                <div class="bio-row"><span class="bio-label">Music Interests:</span><span class="bio-val">Pop, Jazz, Broadway, Piano</span></div>
                                 <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">Visud loves musical analysis and watches videos about breaking down songs for fun. He also recently got into pickleball, which he plays occasionally at the RSF (not to be confused with the RFS, where he builds rockets for fun). You can usually find Visud in MLK, where he studies, yaps, and eats Crumbl.</span></div>
                                 <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">Visud will play you any song in any style on piano if you ask him to!</span></div>
                             </div>
@@ -387,7 +455,7 @@
                                 <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2024</span></div>
                                 <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Psychology and Legal Studies</span></div>
                                 <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">La Verne, CA</span></div>
-                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">pop, indie, rnb, and jazz</span></div>
+                                <div class="bio-row"><span class="bio-label">Music Interests:</span><span class="bio-val">pop, indie, rnb, and jazz</span></div>
                                 <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">Izzy loves reading (literally loves it — she usually spends her free time reading if she’s not singing) and is a HUGE foodie! She’s down to try anything under the sun and a meal is really the key to her heart. She’s also a big yapper and loves making new friends! Her love language is quality time, so whether it’s going out or a night in, Izzy is always open to hanging out. She loves all things cute and cuddly and has a very interesting obsession with pink.</span></div>
                                 <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">Izzy owns every 2000s barbie movie on dvd and can give a synopsis of every one just based on the name 🙏</span></div>
                             </div>
@@ -419,7 +487,7 @@
                                 <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2023</span></div>
                                 <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Cognitive Science</span></div>
                                 <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">Castro Valley, CA</span></div>
-                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">RnB, Pop, House Music lol</span></div>
+                                <div class="bio-row"><span class="bio-label">Music Interests:</span><span class="bio-val">RnB, Pop, House Music lol</span></div>
                                 <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">Kaitlyn loves anything and everything mango, cow, or jellycat related. Most of the time you’ll see her with her digi camera or a sweet treat. She’s always down to go out, yap about niche things, or spend her money on an overpriced rave!</span></div>
                                 <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">I’ve sprained my ankle 8 times in my life</span></div>
                             </div>
@@ -449,15 +517,15 @@
                         <div class="flip-face back">
                             <h3 class="flip-name" style="font-size: var(--font-xl); margin-bottom: .8rem;">Chloe Chang</h3>
                             <div class="flip-bio">
-                                <div class="bio-row"><span class="bio-label">Tagline:</span><span class="bio-val">INSERT SOMETHING FUNNY</span></div>
+                                <div class="bio-row"><span class="bio-label">Tagline:</span><span class="bio-val">DTS crazy aunt</span></div>
                                 <div class="bio-row"><span class="bio-label">Part:</span><span class="bio-val">Mezzo/Alto</span></div>
                                 <div class="bio-row"><span class="bio-label">Year:</span><span class="bio-val">2026</span></div>
                                 <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2022</span></div>
-                                <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Data Science &amp; Economics</span></div>
+                                <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Data Science</span></div>
                                 <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">St. Paul, MN</span></div>
-                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">Songs that make me feel like the main character looking out the car window while it’s raining</span></div>
-                                <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">Chloe is obsessed with watching documentaries and true crime shows. Don’t worry, she won’t murder anyone (at least, we don’t know if she has yet). She can draw a portrait of you in twenty minutes for free! You can find Chloe fast asleep on lawns across campus, the Bart, study lounges, or your shoulder. She prefers the title “Adult who knows all the lyrics to Disney songs” over “Disney Adult”. Lastly, Chloe is a very proud Minnesotan. Skol Vikings!</span></div>
-                                <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">Taylor Swift is 5’11”!</span></div>
+                                <div class="bio-row"><span class="bio-label">Music Interests:</span><span class="bio-val">Imogen Heap is the mother of all a cappella kids</span></div>
+                                <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">Retired/recovering consulting club kid turned solo builder, spends WAY too much time on marketing for collegiate a cappella</span></div>
+                                <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">I will make you the best fried chicken sandwich</span></div>
                             </div>
                             <div class="flip-hint">← Click to flip back</div>
                         </div>
@@ -487,7 +555,7 @@
                                 <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2024</span></div>
                                 <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">EECS + Business</span></div>
                                 <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">Lexington, MA</span></div>
-                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">Guitar stuff, lowkey anything genre wise (my wrapped is fr all over the place)</span></div>
+                                <div class="bio-row"><span class="bio-label">Music Interests:</span><span class="bio-val">Guitar stuff, lowkey anything genre wise (my wrapped is fr all over the place)</span></div>
                                 <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">Sathvik got too lazy to make a bio</span></div>
                                 <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">1:30 AM bagels hitttt</span></div>
                             </div>
@@ -519,7 +587,7 @@
                                 <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Spring 2023</span></div>
                                 <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Public Health and Ancient Greek and Roman Studies</span></div>
                                 <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">Napa, CA</span></div>
-                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">I love all music, especially cinematic scores</span></div>
+                                <div class="bio-row"><span class="bio-label">Music Interests:</span><span class="bio-val">I love all music, especially cinematic scores</span></div>
                                 <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">Juliette is obsessed with fantastical period pieces like Outlander and Game of Thrones. She enjoys spending her time collecting and playing Pokemon, and baking various goods.</span></div>
                                 <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">Juliette is a French dual-citizen who loves to travel.</span></div>
                             </div>
@@ -551,7 +619,7 @@
                                 <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2024</span></div>
                                 <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Psychology</span></div>
                                 <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">Albany, CA</span></div>
-                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">Drake and Justin Bieber Enthusiast. I love rnb artists such as Brent Faiyaz and Daniel Caesar. I also love indie artists such as Beabadoobee and TV Girl.</span></div>
+                                <div class="bio-row"><span class="bio-label">Music Interests:</span><span class="bio-val">Drake and Justin Bieber Enthusiast. I love rnb artists such as Brent Faiyaz and Daniel Caesar. I also love indie artists such as Beabadoobee and TV Girl.</span></div>
                                 <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">I am a classically trained violinist of 13 years. I was introduced to singing when my Dad started to sign me up for musical theater camps as a little kid. I wanted to do acapella because i watch pitch perfect and it looked cool.</span></div>
                                 <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">I’m teaching myself the guitar</span></div>
                             </div>
@@ -583,7 +651,7 @@
                                 <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2023</span></div>
                                 <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Music Theater and Performance Studies</span></div>
                                 <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">Simi Valley, CA</span></div>
-                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">Pop, indie, rock and jazz are Maddie’s favorite genres! Maddie also plays the piano and the guitar and likes to write her own music!</span></div>
+                                <div class="bio-row"><span class="bio-label">Music Interests:</span><span class="bio-val">Pop, indie, rock and jazz are Maddie’s favorite genres! Maddie also plays the piano and the guitar and likes to write her own music!</span></div>
                                 <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">Maddie loves to make jewelry, crochet, read, or hang out with friends! You can find Maddie in the Morrison practice rooms quite often (the life of a music major). When Maddie is not practicing, she likes to spend time soaking in the sun or drinking boba on the Glade. Lastly, Maddie loves warm hugs 🤗.</span></div>
                                 <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">Maddie’s spirit animal is a butterfly, some call her “Mariposa Maddie.”</span></div>
                             </div>
@@ -615,7 +683,7 @@
                                 <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2023</span></div>
                                 <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Cognitive Science, Sociology, and minor in Data Sciences</span></div>
                                 <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">Valencia, CA</span></div>
-                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">Bruno Mars, Pop/Rnb</span></div>
+                                <div class="bio-row"><span class="bio-label">Music Interests:</span><span class="bio-val">Bruno Mars, Pop/Rnb</span></div>
                                 <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">Marcus is lowkey into everything. He especially loves sports, mainly basketball and football, but all sports are enjoyed. If you wanna yap about the cinematography of the recent Marvel movie he will also give you too strong of an opinion. Also a certified big back.</span></div>
                                 <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">Marcus can place every country in Asia on a map.</span></div>
                             </div>
@@ -647,7 +715,7 @@
                                 <div class="bio-row"><span class="bio-label">Member From:</span><span class="bio-val">Fall 2022</span></div>
                                 <div class="bio-row"><span class="bio-label">Major:</span><span class="bio-val">Music, Computer Science</span></div>
                                 <div class="bio-row"><span class="bio-label">Hometown:</span><span class="bio-val">Greenlawn, NY</span></div>
-                                <div class="bio-row"><span class="bio-label">Interests:</span><span class="bio-val">Expression, authenticity, cool beats and grooves</span></div>
+                                <div class="bio-row"><span class="bio-label">Music Interests:</span><span class="bio-val">Expression, authenticity, cool beats and grooves</span></div>
                                 <div class="bio-row"><span class="bio-label">Bio:</span><span class="bio-val">Moore Theobald is a third year hailing from the suburbs of New York City. He enjoys climbing things and learning as many random semi-useful skills as possible. He would have written moore but he wanted to keep his bio short at only fifty words or less so he</span></div>
                                 <div class="bio-row"><span class="bio-label">Random:</span><span class="bio-val">The airspeed velocity of an unladen European swallow is ~20.1 mph</span></div>
                             </div>

@@ -15,7 +15,6 @@
 
     <!-- Custom styles for music-specific elements -->
     <style>
-
         .song-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border);
@@ -284,6 +283,27 @@
                 max-width: 300px;
             }
         }
+
+        /* --- suggestion #2: universal responsive iframes (16:9) --- */
+        .video-item { position: relative; width: 100%; }
+        .video-item::before { content: ""; display: block; padding-top: 56.25%; } /* 16:9 ratio */
+        .video-item iframe {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            border: 0;
+        }
+
+        /* --- suggestion #4: hide-only (sr-only) helper for captions --- */
+        .sr-only {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            border: 0 !important;
+        }
     </style>
 </head>
 
@@ -325,22 +345,50 @@
         </div>
     </section>
 
+    <section class="section-break" aria-hidden="true"></section>
+
     <!-- Music Content -->
-    <section id="music" class="section fade-in">
-        <div class="container">
-            <h2 class="section-title">Latest Release</h2>
-            <p class="section-subtitle">Our debut single "American Boy" (opb. Estelle)</p>
-            
-            <div class="video-grid">
-                <div class="video-item">
-                    <iframe src="https://www.youtube.com/embed/1m-rNMgKxdo?si=qv1WlZ1RilU_PXck&amp;start=60" allowfullscreen></iframe>
+    <section class="hero-section hero-music section fade-in">
+        <div class="hero-wrap">
+        <div class="hero-content-container">
+            <h2 class="hero-lede">
+            Latest Release
+            </h2>
+            <div class="hero-underline"></div>
+    
+            <!-- Single column layout (no .two-column class) -->
+            <div class="hero-columns">
+            <div class="hero-body">
+                <p>
+                From the studio to the stage, Drawn to Scale brings new life and energy to every song through our unique interpretations. All of our arrangements are created by past and present DTS members, and we take pride in our distinct, fresh sound.
+                </p>
+                <p>
+                Listen to our debut single <b>"American Boy"</b> (opb. Estelle), now streaming on all platforms.
+                This track was arranged by DTS alumni Bernard Kim (PhD, '19) and Timothy Fong ('21), with Ayanna Navarro ('25) as soloist.
+                </p>
+    
+                <!-- Spotify embed -->
+                <div style="margin-top:3rem;">
+                <iframe
+                    data-testid="embed-iframe"
+                    style="border-radius:12px"
+                    src="https://open.spotify.com/embed/track/69fsA0L9G7JRuYWkrfVDIm?utm_source=generator&theme=0"
+                    width="100%"
+                    height="352"
+                    frameborder="0"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy">
+                </iframe>
+                </div>
+    
+                <div class="center-button" style="margin-top: 3rem;">
+                <a href="https://distrokid.com/hyperfollow/drawntoscale/american-boy" class="hero-cta" target="_blank" rel="noopener">Listen on all platforms</a>
                 </div>
             </div>
-
-            <div class="center-button" style="margin-top: 5rem;">
-                <a href="https://distrokid.com/hyperfollow/drawntoscale/american-boy" class="hero-cta">Listen on all platforms</a>
+    
+            <!-- No sidebar = single column layout automatically -->
             </div>
-
+        </div>
         </div>
     </section>
 
@@ -352,16 +400,16 @@
             
             <div class="video-grid">
                 <div class="video-item">
-                    <iframe src="https://www.youtube.com/embed/7I8dcsZO9wQ?si=vg-vkgtAczk8RSc6" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/7I8dcsZO9wQ?si=vg-vkgtAczk8RSc6" allowfullscreen loading="lazy"></iframe>
                 </div>
                 <div class="video-item">
-                    <iframe src="https://www.youtube.com/embed/ho99rdcQp64" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/ho99rdcQp64" allowfullscreen loading="lazy"></iframe>
                 </div>
                 <div class="video-item">
-                    <iframe src="https://www.youtube.com/embed/7KMVqcWMyv0" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/7KMVqcWMyv0" allowfullscreen loading="lazy"></iframe>
                 </div>
                 <div class="video-item">
-                    <iframe src="https://www.youtube.com/embed/5FLtlIEjGLg?si=-8mc1EL_y7u5kIGm&amp;start=60" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/5FLtlIEjGLg?si=-8mc1EL_y7u5kIGm&amp;start=60" allowfullscreen loading="lazy"></iframe>
                 </div>
             </div>
         </div>
@@ -379,10 +427,11 @@
                     
                     <div class="repertoire-table-container">
                         <table class="repertoire-table">
+                            <caption class="sr-only">Current repertoire</caption>
                             <thead>
                                 <tr>
-                                    <th>Song</th>
-                                    <th>Original Artist</th>
+                                    <th scope="col">Song</th>
+                                    <th scope="col">Original Artist</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -487,13 +536,13 @@
                 </div>
                 
                 <div class="social-links">
-                    <a href="https://www.youtube.com/user/dtsacapella" class="social-link">
+                    <a href="https://www.youtube.com/user/dtsacapella" class="social-link" target="_blank" rel="noopener">
                         <i class="ion-social-youtube"></i>
                     </a>
-                    <a href="https://www.instagram.com/drawntoscaleberkeley/" class="social-link">
+                    <a href="https://www.instagram.com/drawntoscaleberkeley/" class="social-link" target="_blank" rel="noopener">
                         <i class="ion-social-instagram"></i>
                     </a>
-                    <a href="https://www.facebook.com/drawntoscaleberkeley" class="social-link">
+                    <a href="https://www.facebook.com/drawntoscaleberkeley" class="social-link" target="_blank" rel="noopener">
                         <i class="ion-social-facebook"></i>
                     </a>
                 </div>
