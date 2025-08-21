@@ -1,4 +1,4 @@
 AuthType Basic
 AuthName "hi this is brian i'm really sorry for making your life more difficult"
-AuthUserFile /home/d/dt/dts/public_html/music/.htpasswd
+AuthUserFile /home/d/dt/dts/public_html/music-archive/.htpasswd
 Require valid-user
